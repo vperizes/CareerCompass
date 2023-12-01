@@ -73,6 +73,28 @@ app.patch("/api/v1/jobs/:id", (req, res) => {
   res.status(200).json({ msg: `Job with id of ${id} has been updated.`, job });
 });
 
+//delete job
+app.delete("/api/v1/jobs/:id", (req, res) => {
+  const { id } = req.params;
+  const job = jobs.find((job) => {
+    return job.id === id;
+  });
+
+  //check if job with the given id exists. if not return 404
+  if (!job) {
+    return res.status(404).json({
+      msg: `Job with id: ${id} not found. Please provide a valid id.`,
+    });
+  }
+
+  //return array of jobs that do not match with specified id
+  const newJobs = jobs.filter((job) => {
+    return job.id !== id;
+  });
+  jobs = newJobs;
+  res.status(200).json({ msg: "job deleted" });
+});
+
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
