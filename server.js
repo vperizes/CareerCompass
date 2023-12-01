@@ -52,9 +52,25 @@ app.post("/api/v1/jobs", (req, res) => {
   res.status(201).json({ newJob });
 });
 
-app.post("/", (req, res) => {
-  console.log(req);
-  res.json({ message: "data recieved", data: req.body });
+//edit job
+app.patch("/api/v1/jobs/:id", (req, res) => {
+  const { company, position } = req.body;
+  if (!company || !position) {
+    return res.status(404).json({ msg: "please provide company and position" });
+  }
+
+  const { id } = req.params;
+  const job = jobs.find((job) => {
+    return job.id === id;
+  });
+
+  if (!job) {
+    return res.status(404).json({ msg: `Job with id ${id} not found.` });
+  }
+
+  job.company = company;
+  job.position = position;
+  res.status(200).json({ msg: `Job with id of ${id} has been updated.`, job });
 });
 
 app.listen(port, () => {
