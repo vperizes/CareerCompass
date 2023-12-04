@@ -1,4 +1,5 @@
 //package imports
+import "express-async-errors";
 import express from "express";
 import morgan from "morgan";
 import mongoose from "mongoose";
@@ -13,6 +14,7 @@ import jobRouter from "./routes/jobRouter.js";
 const DATABASE_URI =
   process.env.DATABASE_URI || "mongodb://127.0.0.1:27017/jobifyDB";
 
+//connect to mongo database
 try {
   await mongoose.connect(DATABASE_URI);
   app.listen(port, () => {
@@ -47,8 +49,8 @@ app.use("*", (req, res) => {
 });
 
 //error middleware - catch-all for handling unexpected errors that occur during request processing
+//express-async package handles errors and passes them to this middleware
 app.use((err, req, res, next) => {
   console.log(err);
   res.status(500).json({ msg: "something went wrong" });
-  next();
 });
