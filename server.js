@@ -11,6 +11,9 @@ const port = process.env.PORT;
 //router imports
 import jobRouter from "./routes/jobRouter.js";
 
+//middleware imports
+import errorHandlerMiddleware from "./middleware/errorHandlerMiddleware.js";
+
 const DATABASE_URI =
   process.env.DATABASE_URI || "mongodb://127.0.0.1:27017/jobifyDB";
 
@@ -49,8 +52,5 @@ app.use("*", (req, res) => {
 });
 
 //error middleware - catch-all for handling unexpected errors that occur during request processing
-//express-async package handles errors and passes them to this middleware
-app.use((err, req, res, next) => {
-  console.log(err);
-  res.status(500).json({ msg: "something went wrong" });
-});
+//express-async package handles async errors and passes them to this middleware without needing try-catch block
+app.use(errorHandlerMiddleware);
