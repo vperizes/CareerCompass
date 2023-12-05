@@ -1,4 +1,3 @@
-
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -95,6 +94,9 @@ web_modules/
 .env.test.local
 .env.production.local
 .env.local
+
+
+README_directions.md
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
