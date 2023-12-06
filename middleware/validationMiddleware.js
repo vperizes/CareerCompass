@@ -1,5 +1,6 @@
 import { body, validationResult } from "express-validator";
 import { BadRequestError } from "../errors/customErrors.js";
+import { JOB_STATUS, JOB_TYPE } from "../utils/constants.js";
 
 const withValidationErrors = (validateValues) => {
   return [
@@ -17,12 +18,16 @@ const withValidationErrors = (validateValues) => {
 };
 
 //invoke withValidationErrors and get back 2 middlewares
-export const validateTest = withValidationErrors([
-  //checks that name property in body is not empty. if it is it sends back the chained message
-  body("name")
-    .notEmpty()
-    .withMessage("name is required")
-    .isLength({ min: 2 })
-    .withMessage("name must have at least 2 characters")
-    .trim(),
+
+export const validateJobInput = withValidationErrors([
+  //checks that company and position properties in body are not empty. if it is it sends back the chained message
+  body("company").notEmpty().withMessage("company name is required"),
+  body("position").notEmpty().withMessage("position is required"),
+  body("jobLocation").notEmpty().withMessage("job position is required"),
+  body("jobStatus")
+    .isIn(Object.values(JOB_STATUS))
+    .withMessage("invalid status value"),
+  body("jobType")
+    .isIn(Object.values(JOB_TYPE))
+    .withMessage("invalid type value"),
 ]);
