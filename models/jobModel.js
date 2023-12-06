@@ -1,29 +1,24 @@
 import mongoose, { Schema } from "mongoose";
+import { JOB_STATUS, JOB_TYPE } from "../utils/constants.js";
 
 //schema for new job
 const JobSchema = new Schema(
   {
-    company: {
-      type: String,
-      required: true,
-    },
-    position: {
-      type: String,
-      required: true,
-    },
+    company: String,
+    position: String,
     jobLocation: {
       type: String,
       default: "remote",
     },
     jobStatus: {
       type: String,
-      enum: ["Response pending", "Interview", "Declined", "Offer pending"],
-      default: "Response pending",
+      enum: Object.values(JOB_STATUS),
+      default: JOB_STATUS.response_pending,
     },
     jobType: {
       type: String,
-      enum: ["full-time", "part-time", "intership"],
-      default: "full-time",
+      enum: Object.values(JOB_TYPE),
+      default: JOB_TYPE.full_time,
     },
   },
   { timestamps: true }
