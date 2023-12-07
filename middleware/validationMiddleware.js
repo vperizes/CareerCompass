@@ -12,6 +12,8 @@ const withValidationErrors = (validateValues) => {
       //if isEmpty is false then we have an error and need to return msg
       if (!errors.isEmpty()) {
         const errMessages = errors.array().map((error) => error.msg); //getting msg property from error object
+
+        //wonky way to throw 404 vs. 400 if id syntax is correct
         if (errMessages[0].endsWith("not found.")) {
           throw new NotFoundError(errMessages);
         }
