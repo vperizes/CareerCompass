@@ -10,6 +10,7 @@ const port = process.env.PORT;
 
 //router imports
 import jobRouter from "./routes/jobRouter.js";
+import authRouter from "./routes/authRouter.js";
 
 //middleware imports
 import errorHandlerMiddleware from "./middleware/errorHandlerMiddleware.js";
@@ -39,6 +40,7 @@ app.get("/", (req, res) => {
 });
 
 ///creating starting url for controllers/routes
+app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/jobs", jobRouter);
 
 //not found middleware - handles requests for non-existent routes
