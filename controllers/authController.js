@@ -2,6 +2,8 @@ import { StatusCodes } from "http-status-codes";
 import UserModel from "../models/UserModel.js";
 
 export const register = async (req, res) => {
+  const isFirstAccount = (await UserModel.countDocuments()) === 0;
+  req.body.role = isFirstAccount ? "admin" : "user";
   const newUser = await UserModel.create(req.body);
   res.status(StatusCodes.CREATED).json({ newUser });
 };
