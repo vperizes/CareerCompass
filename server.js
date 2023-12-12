@@ -8,12 +8,15 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT;
 
+import cookieParser from "cookie-parser";
+
 //router imports
 import jobRouter from "./routes/jobRouter.js";
 import authRouter from "./routes/authRouter.js";
 
 //middleware imports
 import errorHandlerMiddleware from "./middleware/errorHandlerMiddleware.js";
+import { authenticateUser } from "./middleware/authMiddleware.js";
 
 const DATABASE_URI =
   process.env.DATABASE_URI || "mongodb://127.0.0.1:27017/jobifyDB";
@@ -30,6 +33,7 @@ try {
 }
 
 app.use(express.json());
+app.use(cookieParser());
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
@@ -41,7 +45,7 @@ app.get("/", (req, res) => {
 
 ///creating starting url for controllers/routes
 app.use("/api/v1/auth", authRouter);
-app.use("/api/v1/jobs", jobRouter);
+app.use("/api/v1/jobs", authenticateUser, jobRouter);
 
 //not found middleware - handles requests for non-existent routes
 app.use("*", (req, res) => {

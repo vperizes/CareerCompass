@@ -20,6 +20,10 @@ const JobSchema = new Schema(
       enum: Object.values(JOB_TYPE),
       default: JOB_TYPE.full_time,
     },
+    createdBy: {
+      type: mongoose.Types.ObjectId, //points to mongo id
+      ref: "User",
+    },
   },
   { timestamps: true }
 );

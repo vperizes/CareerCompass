@@ -6,3 +6,9 @@ export const createJWT = (payload) => {
   });
   return token;
 };
+
+//pass in jwt that we get back from cookie per request
+export const verifyJWT = (token) => {
+  const decoded = jwt.verify(token, process.env.JWT_SECRET);
+  return decoded;
+};
