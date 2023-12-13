@@ -5,8 +5,7 @@ import { StatusCodes } from "http-status-codes";
 ////CONTROLLERS
 //Get all jobs
 export const getAllJobs = async (req, res) => {
-  console.log(req.user);
-  const jobs = await jobModel.find({});
+  const jobs = await jobModel.find({ createdBy: req.user.userId }); //only getting job assoc with loged in user
   res.status(StatusCodes.OK).json({ jobs });
 };
 
@@ -20,6 +19,7 @@ export const getSingleJob = async (req, res) => {
 
 //Create job
 export const createJob = async (req, res) => {
+  req.body.createdBy = req.user.userId;
   const newJob = await jobModel.create(req.body); //creating a new document (job entry) in Job collection
   res.status(201).json({ newJob });
 };
