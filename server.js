@@ -13,6 +13,7 @@ import cookieParser from "cookie-parser";
 //router imports
 import jobRouter from "./routes/jobRouter.js";
 import authRouter from "./routes/authRouter.js";
+import userRouter from "./routes/userRouter.js";
 
 //middleware imports
 import errorHandlerMiddleware from "./middleware/errorHandlerMiddleware.js";
@@ -45,6 +46,7 @@ app.get("/", (req, res) => {
 
 ///creating starting url for controllers/routes
 app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/users", authenticateUser, userRouter);
 app.use("/api/v1/jobs", authenticateUser, jobRouter);
 
 //not found middleware - handles requests for non-existent routes
