@@ -19,4 +19,11 @@ const UserSchema = new Schema({
   },
 });
 
+//on find user instance create toJSON method. use method created on instance to omit password
+UserSchema.methods.toJSON = function () {
+  let obj = this.toObject();
+  delete obj.password;
+  return obj;
+};
+
 export default mongoose.model("User", UserSchema);
