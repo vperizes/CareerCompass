@@ -95,3 +95,20 @@ export const validateUserLogin = withValidationErrors([
     .withMessage("invalid email"),
   body("password").notEmpty().withMessage("password is required"),
 ]);
+
+export const validateUserUpdate = withValidationErrors([
+  body("name").notEmpty().withMessage("name is required"),
+  body("email")
+    .notEmpty()
+    .withMessage("email is required")
+    .isEmail()
+    .withMessage("invalid email format")
+    .custom(async (email, { req }) => {
+      const user = await UserModel.findOne({ email });
+      if (user && user._id.toString() !== req.user.userId) {
+        throw new BadRequestError("email already exists");
+      }
+    }),
+  body("lastName").notEmpty().withMessage("last name is required"),
+  body("location").notEmpty().withMessage("location is required"),
+]);

@@ -11,9 +11,15 @@ export const getCurrentUser = async (req, res) => {
 
 //for admin route to check num users and jobs
 export const getAppStats = async (req, res) => {
-  res.status(StatusCodes.OK).json({ msg: "app stats" });
+  const users = await UserModel.countDocuments();
+  const jobs = await jobModel.countDocuments();
+  res.status(StatusCodes.OK).json({ users, jobs });
 };
 
 export const updateUser = async (req, res) => {
+  //password value not being added to update controller
+  const obj = { ...req.body };
+  delete obj.password;
+  const updatedUser = await UserModel.findByIdAndUpdate(req.user.userId, obj);
   res.status(StatusCodes.OK).json({ msg: "user updated" });
 };

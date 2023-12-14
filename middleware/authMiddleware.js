@@ -1,4 +1,7 @@
-import { UnauthenticatedError } from "../errors/customErrors.js";
+import {
+  UnauthenticatedError,
+  UnauthorizedError,
+} from "../errors/customErrors.js";
 import { verifyJWT } from "../utils/tokenUtils.js";
 
 export const authenticateUser = (req, res, next) => {
@@ -15,4 +18,14 @@ export const authenticateUser = (req, res, next) => {
   } catch (error) {
     throw new UnauthenticatedError("invalid authentication");
   }
+};
+
+export const authorizePermissions = (...roles) => {
+  //since authorizePermissions is being invoked immediately in user router need to return req, res, next to avoid errors
+  return (req, res, next) => {
+    if (!roles.includes(req.user.role)) {
+      throw new UnauthorizedError("unauthorized to access this route");
+    }
+    next();
+  };
 };
