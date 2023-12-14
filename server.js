@@ -44,6 +44,10 @@ app.get("/", (req, res) => {
   res.send("hello there");
 });
 
+app.get("/api/v1/test", (req, res) => {
+  res.json({ msg: "test route" });
+});
+
 ///creating starting url for controllers/routes
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/users", authenticateUser, userRouter);
