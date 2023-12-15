@@ -13,6 +13,8 @@ import {
   Admin,
 } from "./pages/index";
 
+import { resgisterAction } from "./pages/Register";
+
 //looks for 'darkTheme' value in local storage and depending on value we'll add dark theme and set value as state value
 export const checkDefaultTheme = () => {
   const isDarkTheme = localStorage.getItem("darkTheme") === "true";
@@ -42,6 +44,7 @@ const router = createBrowserRouter([
       {
         path: "register",
         element: <Register />,
+        action: resgisterAction,
       },
       {
         path: "login",

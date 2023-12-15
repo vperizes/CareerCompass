@@ -5,7 +5,6 @@ import "./index.css";
 import axios from "axios";
 
 const data = await axios.get("/api/v1/test");
-console.log(data);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
