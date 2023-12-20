@@ -1,15 +1,24 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, redirect, useLoaderData } from "react-router-dom";
 import Wrapper from "../assets/wrappers/Dashboard";
 import { BigSidebar, Navbar, SmallSidebar } from "../components";
 import { createContext, useContext, useState } from "react";
 import { checkDefaultTheme } from "../App";
+import axios from "axios";
+
+export const dashboardLoader = async () => {
+  try {
+    const { data } = await axios.get("api/v1/users/current-user");
+    return data;
+  } catch (error) {
+    return redirect("/");
+  }
+};
 
 //create global context in lieu of prop drilling
 const DashboardContext = createContext();
 
 const DashboardLayout = () => {
-  //temp - will link to DB/server
-  const user = { name: "Victoria" };
+  const { user } = useLoaderData();
   const [showSidebar, setShowSidebar] = useState(false);
   const [isDarkTheme, setIsDarkTheme] = useState(checkDefaultTheme());
 
@@ -46,7 +55,7 @@ const DashboardLayout = () => {
           <div>
             <Navbar />
             <div className="dashboard-page">
-              <Outlet />
+              <Outlet context={{ user }} />
             </div>
           </div>
         </main>

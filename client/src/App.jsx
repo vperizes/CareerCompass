@@ -15,6 +15,7 @@ import {
 
 import { resgisterAction } from "./pages/Register";
 import { loginAction } from "./pages/Login";
+import { dashboardLoader } from "./pages/DashboardLayout";
 
 //looks for 'darkTheme' value in local storage and depending on value we'll add dark theme and set value as state value
 export const checkDefaultTheme = () => {
@@ -55,6 +56,7 @@ const router = createBrowserRouter([
       {
         path: "dashboard",
         element: <DashboardLayout />,
+        loader: dashboardLoader,
         children: [
           {
             index: true,
