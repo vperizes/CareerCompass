@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 
 export const dashboardLoader = async () => {
   try {
-    const { data } = await axios.get("api/v1/users/current-user");
+    const { data } = await axios.get("/api/v1/users/current-user");
     return data;
   } catch (error) {
     return redirect("/");
