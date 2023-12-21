@@ -13,9 +13,11 @@ import {
   Admin,
 } from "./pages/index";
 
+//action and loader imports
 import { resgisterAction } from "./pages/Register";
 import { loginAction } from "./pages/Login";
 import { dashboardLoader } from "./pages/DashboardLayout";
+import { createJobAction } from "./pages/AddJob";
 
 //looks for 'darkTheme' value in local storage and depending on value we'll add dark theme and set value as state value
 export const checkDefaultTheme = () => {
@@ -61,6 +63,7 @@ const router = createBrowserRouter([
           {
             index: true,
             element: <AddJob />,
+            action: createJobAction,
           },
           {
             path: "stats",
