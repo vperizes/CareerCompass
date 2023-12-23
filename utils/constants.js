@@ -1,8 +1,8 @@
 export const JOB_STATUS = {
-  response_pending: "Response pending",
+  response_pending: "Pending",
   interview: "Interview",
   declined: "Declined",
-  offer_pending: "Offer pending",
+  offer_pending: "Offer",
 };
 
 export const JOB_TYPE = {
