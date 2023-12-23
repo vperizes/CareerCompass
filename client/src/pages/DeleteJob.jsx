@@ -1,4 +1,13 @@
-const DeleteJob = () => {
-  return <h1>DeleteJob</h1>;
+import axios from "axios";
+import { redirect } from "react-router-dom";
+import { toast } from "react-toastify";
+
+export const deleteJobAction = async ({ params }) => {
+  try {
+    await axios.delete(`/api/v1/jobs/${params.id}`);
+    toast.success("Job deleted");
+  } catch (error) {
+    toast.error(error?.response?.data?.msg);
+  }
+  return redirect("/dashboard/all-jobs");
 };
-export default DeleteJob;

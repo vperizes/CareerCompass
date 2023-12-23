@@ -21,6 +21,7 @@ import { dashboardLoader } from "./pages/DashboardLayout";
 import { createJobAction } from "./pages/AddJob";
 import { allJobsLoader } from "./pages/AllJobs";
 import { editJobAction, editJobLoader } from "./pages/EditJob";
+import { deleteJobAction } from "./pages/DeleteJob";
 
 //looks for 'darkTheme' value in local storage and depending on value we'll add dark theme and set value as state value
 export const checkDefaultTheme = () => {
@@ -90,6 +91,10 @@ const router = createBrowserRouter([
             element: <EditJob />,
             loader: editJobLoader,
             action: editJobAction,
+          },
+          {
+            path: "delete-job/:id",
+            action: deleteJobAction,
           },
         ],
       },
