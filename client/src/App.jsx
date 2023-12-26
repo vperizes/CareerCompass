@@ -22,6 +22,7 @@ import { createJobAction } from "./pages/AddJob";
 import { allJobsLoader } from "./pages/AllJobs";
 import { editJobAction, editJobLoader } from "./pages/EditJob";
 import { deleteJobAction } from "./pages/DeleteJob";
+import { adminLoader } from "./pages/Admin";
 
 //looks for 'darkTheme' value in local storage and depending on value we'll add dark theme and set value as state value
 export const checkDefaultTheme = () => {
@@ -85,6 +86,7 @@ const router = createBrowserRouter([
           {
             path: "admin",
             element: <Admin />,
+            loader: adminLoader,
           },
           {
             path: "edit-job/:id",
