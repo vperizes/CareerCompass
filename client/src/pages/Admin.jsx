@@ -3,6 +3,7 @@ import axios from "axios";
 import { useLoaderData, redirect } from "react-router-dom";
 import Wrapper from "../assets/wrappers/StatsContainer";
 import { toast } from "react-toastify";
+import { StatItem } from "../components";
 
 export const adminLoader = async ({ request }) => {
   try {
@@ -15,10 +16,23 @@ export const adminLoader = async ({ request }) => {
 };
 
 const Admin = () => {
-  const { user, jobs } = useLoaderData();
+  const { users, jobs } = useLoaderData();
   return (
     <Wrapper>
-      <h1>Admin page</h1>
+      <StatItem
+        title="current users"
+        count={users}
+        color="#e9b949"
+        bcgColor="#fcefc7"
+        icon={<FaSuitcaseRolling />}
+      ></StatItem>
+      <StatItem
+        title="total jobs"
+        count={jobs}
+        color="#647acb"
+        bcgColor="#e0e8f9"
+        icon={<FaCalendarCheck />}
+      ></StatItem>
     </Wrapper>
   );
 };
