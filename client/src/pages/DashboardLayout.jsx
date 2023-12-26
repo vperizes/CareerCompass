@@ -36,7 +36,7 @@ const DashboardLayout = () => {
   };
 
   const logoutUser = async () => {
-    await axios.get("api/v1/auth/logout");
+    await axios.get("/api/v1/auth/logout");
     navigate("/");
     toast.success("Logged Out");
   };
