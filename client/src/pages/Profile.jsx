@@ -1,6 +1,27 @@
 import { Form, useNavigation, useOutletContext } from "react-router-dom";
 import Wrapper from "../assets/wrappers/DashboardFormPage";
 import { FormInput } from "../components";
+import axios from "axios";
+import { toast } from "react-toastify";
+
+export const updateUserAction = async ({ request }) => {
+  const formData = await request.formData();
+  const file = formData.get("avatar");
+
+  if (file && file.size > 5000000) {
+    toast.error("image size too large");
+    return null;
+  }
+
+  try {
+    await axios.patch("/api/v1/users/update-user", formData);
+    toast.success("Profile updated");
+  } catch (error) {
+    toast.error(error?.response?.data?.msg);
+  }
+
+  return null;
+};
 
 const Profile = () => {
   const { user } = useOutletContext();
