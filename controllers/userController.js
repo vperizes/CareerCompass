@@ -17,6 +17,7 @@ export const getAppStats = async (req, res) => {
 };
 
 export const updateUser = async (req, res) => {
+  console.log(req.file);
   //password value not being added to update controller
   const obj = { ...req.body };
   delete obj.password;
