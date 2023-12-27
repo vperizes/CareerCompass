@@ -17,6 +17,8 @@ const UserSchema = new Schema({
     enum: ["user", "admin"],
     default: "user",
   },
+  avatar: String,
+  avatarPublicId: String,
 });
 
 //on find user instance create toJSON method. use method created on instance to omit password

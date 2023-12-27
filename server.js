@@ -10,6 +10,11 @@ const port = process.env.PORT;
 
 import cookieParser from "cookie-parser";
 
+//public
+import { dirname } from "path";
+import { fileURLToPath } from "url";
+import path from "path";
+
 //router imports
 import jobRouter from "./routes/jobRouter.js";
 import authRouter from "./routes/authRouter.js";
@@ -33,6 +38,10 @@ try {
   process.exit(1);
 }
 
+//path to public folder, temp storage for avatar uploads
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+app.use(express.static(path.resolve(__dirname, "./public")));
 app.use(express.json());
 app.use(cookieParser());
 
