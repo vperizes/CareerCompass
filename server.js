@@ -4,6 +4,7 @@ import express from "express";
 import morgan from "morgan";
 import mongoose from "mongoose";
 import * as dotenv from "dotenv";
+import cloudinary from "cloudinary";
 dotenv.config();
 const app = express();
 const port = process.env.PORT;
@@ -23,6 +24,13 @@ import userRouter from "./routes/userRouter.js";
 //middleware imports
 import errorHandlerMiddleware from "./middleware/errorHandlerMiddleware.js";
 import { authenticateUser } from "./middleware/authMiddleware.js";
+
+//cloudinary API
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUD_API_KEY,
+  api_secret: process.env.CLOUD_API_SECRET,
+});
 
 const DATABASE_URI =
   process.env.DATABASE_URI || "mongodb://127.0.0.1:27017/jobifyDB";
