@@ -11,7 +11,7 @@ export const createJobAction = async ({ request }) => {
   const data = Object.fromEntries(formData);
 
   try {
-    await axios.post("api/v1/jobs", data);
+    await axios.post("/api/v1/jobs", data);
     toast.success("Job Added");
     return redirect("/dashboard/all-jobs");
   } catch (error) {

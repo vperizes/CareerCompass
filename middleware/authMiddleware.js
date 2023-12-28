@@ -1,6 +1,7 @@
 import {
   UnauthenticatedError,
   UnauthorizedError,
+  BadRequestError,
 } from "../errors/customErrors.js";
 import { verifyJWT } from "../utils/tokenUtils.js";
 
@@ -12,8 +13,9 @@ export const authenticateUser = (req, res, next) => {
 
   try {
     const { userId, role } = verifyJWT(token);
+    const demoUser = userId === "658db88134c655f75b0d6dbb";
     //creating new object property on req body
-    req.user = { userId, role };
+    req.user = { userId, role, demoUser };
     next();
   } catch (error) {
     throw new UnauthenticatedError("invalid authentication");
@@ -28,4 +30,13 @@ export const authorizePermissions = (...roles) => {
     }
     next();
   };
+};
+
+export const checkForDemoUser = (req, res, next) => {
+  if (req.user.demoUser) {
+    throw new BadRequestError(
+      "You are using a demo account with restricted access. Register or login for full access."
+    );
+  }
+  next();
 };
