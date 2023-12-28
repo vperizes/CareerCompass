@@ -1,6 +1,6 @@
-import { Form, useNavigation, useOutletContext } from "react-router-dom";
+import { Form, useOutletContext } from "react-router-dom";
 import Wrapper from "../assets/wrappers/DashboardFormPage";
-import { FormInput } from "../components";
+import { FormInput, SubmitBtn } from "../components";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -26,9 +26,6 @@ export const updateUserAction = async ({ request }) => {
 const Profile = () => {
   const { user } = useOutletContext();
   const { name, lastName, email, location } = user;
-
-  const navigation = useNavigation();
-  const isSubmitting = navigation.state === "submitting";
 
   return (
     <Wrapper>
@@ -56,13 +53,7 @@ const Profile = () => {
           />
           <FormInput type="email" name="email" defaultValue={email} />
           <FormInput type="text" name="location" defaultValue={location} />
-          <button
-            type="submit"
-            className="btn btn-block form-btn"
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? "Submitting..." : "submit"}
-          </button>
+          <SubmitBtn formBtn />
         </div>
       </Form>
     </Wrapper>
