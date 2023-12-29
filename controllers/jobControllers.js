@@ -1,7 +1,9 @@
 //importing mongoDB model
 import jobModel from "../models/jobModel.js";
-
 import { StatusCodes } from "http-status-codes";
+import mongoose from "mongoose";
+import day from "dayjs";
+
 ////CONTROLLERS
 //Get all jobs
 export const getAllJobs = async (req, res) => {
@@ -43,4 +45,42 @@ export const deleteJob = async (req, res) => {
   const removedJob = await jobModel.findByIdAndDelete(id);
 
   res.status(200).json({ msg: "job deleted", removedJob: removedJob });
+};
+
+export const showStats = async (req, res) => {
+  let stats = await jobModel.aggregate([
+    { $match: { createdBy: new mongoose.Types.ObjectId(req.user.userId) } },
+    { $group: { _id: "$jobStatus", count: { $sum: 1 } } },
+  ]);
+
+  stats = stats.reduce((acc, curr) => {
+    const { _id: title, count } = curr;
+    acc[title] = count;
+    return acc;
+  }, {});
+
+  console.log(stats);
+
+  //placeholder data
+  const defaultStats = {
+    pending: stats.pending || 0,
+    interview: stats.interview || 0,
+    declined: stats.declined || 0,
+    offer: stats.offer || 0,
+  };
+  const monthlyApplications = [
+    {
+      date: "Oct 23",
+      count: 12,
+    },
+    {
+      date: "Nov 23",
+      count: 9,
+    },
+    {
+      date: "Dec 23",
+      count: 4,
+    },
+  ];
+  res.status(StatusCodes.OK).json({ defaultStats, monthlyApplications });
 };
