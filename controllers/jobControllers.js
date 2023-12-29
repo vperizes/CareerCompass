@@ -69,19 +69,32 @@ export const showStats = async (req, res) => {
     declined: stats.declined || 0,
     offer: stats.offer || 0,
   };
-  const monthlyApplications = [
+
+  let monthlyApplications = await jobModel.aggregate([
+    { $match: { createdBy: new mongoose.Types.ObjectId(req.user.userId) } },
     {
-      date: "Oct 23",
-      count: 12,
+      $group: {
+        _id: { year: { $year: "$createdAt" }, month: { $month: "$createdAt" } }, //grouping data by year and month -> sum jobs
+        count: { $sum: 1 },
+      },
     },
-    {
-      date: "Nov 23",
-      count: 9,
-    },
-    {
-      date: "Dec 23",
-      count: 4,
-    },
-  ];
+    { $sort: { "_id.year": -1, "_id.month": -1 } }, //get the latest month first - sets us up to view latest data
+    { $limit: 6 }, //only show last 6 months
+  ]);
+
+  monthlyApplications = monthlyApplications
+    .map((item) => {
+      const {
+        _id: { year, month },
+        count,
+      } = item;
+      const date = day()
+        .month(month - 1)
+        .year(year)
+        .format("MMM YY");
+      return { date, count };
+    })
+    .reverse(); //reversing to we show months in chronologicl order
+
   res.status(StatusCodes.OK).json({ defaultStats, monthlyApplications });
 };
