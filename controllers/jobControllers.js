@@ -49,10 +49,11 @@ export const deleteJob = async (req, res) => {
 
 export const showStats = async (req, res) => {
   let stats = await jobModel.aggregate([
-    { $match: { createdBy: new mongoose.Types.ObjectId(req.user.userId) } },
-    { $group: { _id: "$jobStatus", count: { $sum: 1 } } },
+    { $match: { createdBy: new mongoose.Types.ObjectId(req.user.userId) } }, //matching stage - get jobs assoc with user
+    { $group: { _id: "$jobStatus", count: { $sum: 1 } } }, //grouping stage - group jobs by job type
   ]);
 
+  //reduce stats array to object
   stats = stats.reduce((acc, curr) => {
     const { _id: title, count } = curr;
     acc[title] = count;
