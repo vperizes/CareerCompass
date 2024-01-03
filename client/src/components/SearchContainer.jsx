@@ -2,8 +2,11 @@ import { Form, Link, useSubmit } from "react-router-dom";
 import Wrapper from "../assets/wrappers/DashboardFormPage";
 import { FormInput, FormInputSelect, SubmitBtn } from ".";
 import { JOB_SORT_BY, JOB_STATUS, JOB_TYPE } from "../../../utils/constants";
+import { useAllJobsContext } from "../pages/AllJobs";
 
 const SearchContainer = () => {
+  const { searchValues } = useAllJobsContext();
+  const { search, jobStatus, jobType, sort } = searchValues;
   const submit = useSubmit();
   return (
     <Wrapper>
@@ -13,6 +16,7 @@ const SearchContainer = () => {
           <FormInput
             type="search"
             name="search"
+            defaultValue={search}
             onChange={(event) => {
               submit(event.currentTarget.form);
             }}
@@ -21,7 +25,7 @@ const SearchContainer = () => {
             name="jobStatus"
             labelText="job status"
             list={["all", ...Object.values(JOB_STATUS)]}
-            defaultValue="all"
+            defaultValue={jobStatus}
             onChange={(event) => {
               submit(event.currentTarget.form);
             }}
@@ -30,7 +34,7 @@ const SearchContainer = () => {
             name="jobType"
             labelText="job type"
             list={["all", ...Object.values(JOB_TYPE)]}
-            defaultValue="all"
+            defaultValue={jobType}
             onChange={(event) => {
               submit(event.currentTarget.form);
             }}
@@ -38,7 +42,7 @@ const SearchContainer = () => {
           <FormInputSelect
             name="sort"
             list={Object.values(JOB_SORT_BY)}
-            defaultValue="newest"
+            defaultValue={sort}
             onChange={(event) => {
               submit(event.currentTarget.form);
             }}
