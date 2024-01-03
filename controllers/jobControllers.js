@@ -7,7 +7,38 @@ import day from "dayjs";
 ////CONTROLLERS
 //Get all jobs
 export const getAllJobs = async (req, res) => {
-  const jobs = await jobModel.find({ createdBy: req.user.userId }); //only getting job assoc with loged in user
+  const { search, jobStatus, jobType, sort } = req.query;
+  const queryObj = {
+    createdBy: req.user.userId,
+  };
+
+  //only add position and company to query obj if search exists
+  //using mongodb aggregation and regular expression search capabilities
+  if (search) {
+    queryObj.$or = [
+      { position: { $regex: search, $options: "i" } },
+      { company: { $regex: search, $options: "i" } },
+    ];
+  }
+
+  if (jobStatus && jobStatus !== "all") {
+    queryObj.jobStatus = jobStatus;
+  }
+
+  if (jobType && jobType !== "all") {
+    queryObj.jobType = jobType;
+  }
+
+  const sortOptions = {
+    newest: "-createdAt",
+    oldest: "createdAt",
+    "a-z": "position",
+    "z-a": "-position",
+  };
+
+  const sortKey = sortOptions[sort] || sortOptions.newest;
+
+  const jobs = await jobModel.find(queryObj).sort(sortKey);
   res.status(StatusCodes.OK).json({ jobs });
 };
 
