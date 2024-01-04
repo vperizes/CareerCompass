@@ -8,6 +8,18 @@ const SearchContainer = () => {
   const { searchValues } = useAllJobsContext();
   const { search, jobStatus, jobType, sort } = searchValues;
   const submit = useSubmit();
+
+  const debounce = (onChange) => {
+    let timeout;
+    //return fucntion has access to event
+    return (event) => {
+      const form = event.currentTarget.form;
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        onChange(form);
+      }, 2000);
+    };
+  };
   return (
     <Wrapper>
       <Form className="form">
@@ -17,9 +29,9 @@ const SearchContainer = () => {
             type="search"
             name="search"
             defaultValue={search}
-            onChange={(event) => {
-              submit(event.currentTarget.form);
-            }}
+            onChange={debounce((form) => {
+              submit(form);
+            })}
           />
           <FormInputSelect
             name="jobStatus"
