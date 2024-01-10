@@ -49,7 +49,7 @@ try {
 //path to public folder, temp storage for avatar uploads
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-app.use(express.static(path.resolve(__dirname, "./public")));
+app.use(express.static(path.resolve(__dirname, "./client/dist")));
 app.use(express.json());
 app.use(cookieParser());
 
@@ -71,7 +71,7 @@ app.use("/api/v1/users", authenticateUser, userRouter);
 app.use("/api/v1/jobs", authenticateUser, jobRouter);
 
 app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "./public", "index.html"));
+  res.sendFile(path.resolve(__dirname, "./client/dist", "index.html"));
 });
 
 //not found middleware - handles requests for non-existent routes
