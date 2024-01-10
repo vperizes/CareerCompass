@@ -105,8 +105,6 @@ export const showStats = async (req, res) => {
     return acc;
   }, {});
 
-  console.log(stats);
-
   //placeholder data
   const defaultStats = {
     pending: stats.pending || 0,
