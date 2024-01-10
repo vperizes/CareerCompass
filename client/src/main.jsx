@@ -9,8 +9,8 @@ import { ToastContainer } from "react-toastify";
 const data = await axios.get("/api/v1/test");
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
+  <>
     <App />
     <ToastContainer position="top-center" />
-  </React.StrictMode>
+  </>
 );
