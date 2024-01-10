@@ -1,6 +1,6 @@
-import logo from "../assets/images/logo.svg";
+import logo from "../assets/images/CClogo.svg";
 
 const Logo = () => {
-  return <img src={logo} alt="jobify logo" className="logo" />;
+  return <img src={logo} alt="career compass logo" className="logo" />;
 };
 export default Logo;
