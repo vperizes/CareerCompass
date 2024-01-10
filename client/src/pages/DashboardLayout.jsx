@@ -6,12 +6,11 @@ import {
   useNavigation,
 } from "react-router-dom";
 import Wrapper from "../assets/wrappers/Dashboard";
-import { BigSidebar, Navbar, SmallSidebar } from "../components";
+import { BigSidebar, Navbar, SmallSidebar, Loading } from "../components";
 import { createContext, useContext, useState } from "react";
 import { checkDefaultTheme } from "../App";
 import axios from "axios";
 import { toast } from "react-toastify";
-import Loading from "../components/Loading";
 
 export const dashboardLoader = async () => {
   try {
