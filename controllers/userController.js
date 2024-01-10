@@ -2,7 +2,7 @@ import UserModel from "../models/UserModel.js";
 import jobModel from "../models/jobModel.js";
 import { StatusCodes } from "http-status-codes";
 import cloudinary from "cloudinary";
-import { promises as fs } from "fs";
+import { formatImage } from "../middleware/multerMiddleware.js";
 
 export const getCurrentUser = async (req, res) => {
   const user = await UserModel.findOne({ _id: req.user.userId });
@@ -23,8 +23,8 @@ export const updateUser = async (req, res) => {
 
   //update image only if user is sending image
   if (req.file) {
-    const response = await cloudinary.v2.uploader.upload(req.file.path);
-    await fs.unlink(req.file.path); //removes images locally if image can be uploaded to cloudinary
+    const file = formatImage(req.file);
+    const response = await cloudinary.v2.uploader.upload(file);
     newUserInfo.avatar = response.secure_url;
     newUserInfo.avatarPublicId = response.public_id;
   }
