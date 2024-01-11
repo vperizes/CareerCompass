@@ -1,5 +1,4 @@
 import axios from "axios";
-import { useLoaderData } from "react-router-dom";
 import { ChartsContainer, StatsContainer } from "../components";
 import { useQuery } from "@tanstack/react-query";
 
