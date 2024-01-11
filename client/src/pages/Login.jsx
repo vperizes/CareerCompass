@@ -4,18 +4,21 @@ import { FormInput, Logo, SubmitBtn } from "../components";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-export const loginAction = async ({ request }) => {
-  const formData = await request.formData();
-  const data = Object.fromEntries(formData);
-  try {
-    await axios.post("/api/v1/auth/login", data);
-    toast.success("Login Successful");
-    return redirect("/dashboard");
-  } catch (error) {
-    toast.error(error?.response?.data?.msg);
-    return error;
-  }
-};
+export const loginAction =
+  (queryClient) =>
+  async ({ request }) => {
+    const formData = await request.formData();
+    const data = Object.fromEntries(formData);
+    try {
+      await axios.post("/api/v1/auth/login", data);
+      queryClient.invalidateQueries(); //invalidating all queries on login so data from other users is not cached
+      toast.success("Login Successful");
+      return redirect("/dashboard");
+    } catch (error) {
+      toast.error(error?.response?.data?.msg);
+      return error;
+    }
+  };
 
 const Login = () => {
   const navigate = useNavigate();

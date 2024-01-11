@@ -47,6 +47,7 @@ const DashboardLayout = ({ queryClient }) => {
 
   const logoutUser = async () => {
     await axios.get("/api/v1/auth/logout");
+    queryClient.invalidateQueries();
     navigate("/");
     toast.success("Logged Out");
   };
