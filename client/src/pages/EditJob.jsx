@@ -5,16 +5,29 @@ import { JOB_STATUS, JOB_TYPE } from "../../../utils/constants";
 import { Form, redirect } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
 
-export const editJobLoader = async ({ params }) => {
-  try {
-    const { data } = await axios.get(`/api/v1/jobs/${params.id}`);
-    return data;
-  } catch (error) {
-    toast.error(error?.response?.data?.msg);
-    return redirect("/dashboard/all-jobs");
-  }
+const singleJobQuery = (id) => {
+  return {
+    queryKey: ["job", id],
+    queryFn: async () => {
+      const { data } = await axios.get(`/api/v1/jobs/${id}`);
+      return data;
+    },
+  };
 };
+
+export const editJobLoader =
+  (queryClient) =>
+  async ({ params }) => {
+    try {
+      await queryClient.ensureQueryData(singleJobQuery(params.id));
+      return params.id;
+    } catch (error) {
+      toast.error(error?.response?.data?.msg);
+      return redirect("/dashboard/all-jobs");
+    }
+  };
 
 export const editJobAction =
   (queryClient) =>
@@ -34,7 +47,11 @@ export const editJobAction =
   };
 
 const EditJob = () => {
-  const { job } = useLoaderData();
+  const id = useLoaderData();
+
+  const {
+    data: { job },
+  } = useQuery(singleJobQuery(id));
 
   return (
     <Wrapper>
