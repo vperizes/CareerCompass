@@ -6,19 +6,22 @@ import { Form, redirect } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
 
-export const createJobAction = async ({ request }) => {
-  const formData = await request.formData();
-  const data = Object.fromEntries(formData);
+export const createJobAction =
+  (queryClient) =>
+  async ({ request }) => {
+    const formData = await request.formData();
+    const data = Object.fromEntries(formData);
 
-  try {
-    await axios.post("/api/v1/jobs", data);
-    toast.success("Job Added");
-    return redirect("/dashboard/all-jobs");
-  } catch (error) {
-    toast.error(error?.response?.data?.msg);
-    return error;
-  }
-};
+    try {
+      await axios.post("/api/v1/jobs", data);
+      queryClient.invalidateQueries(["jobs"]);
+      toast.success("Job Added");
+      return redirect("/dashboard/all-jobs");
+    } catch (error) {
+      toast.error(error?.response?.data?.msg);
+      return error;
+    }
+  };
 
 const AddJob = () => {
   const { user } = useOutletContext();
