@@ -5,6 +5,9 @@ import morgan from "morgan";
 import mongoose from "mongoose";
 import * as dotenv from "dotenv";
 import cloudinary from "cloudinary";
+import helmet from "helmet";
+import mongoSanitize from "express-mongo-sanitize";
+
 dotenv.config();
 const app = express();
 const port = process.env.PORT;
@@ -52,18 +55,12 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 app.use(express.static(path.resolve(__dirname, "./client/dist")));
 app.use(express.json());
 app.use(cookieParser());
+app.use(helmet());
+app.use(mongoSanitize());
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
-
-app.get("/", (req, res) => {
-  res.send("hello there");
-});
-
-app.get("/api/v1/test", (req, res) => {
-  res.json({ msg: "test route" });
-});
 
 ///creating starting url for controllers/routes
 app.use("/api/v1/auth", authRouter);
