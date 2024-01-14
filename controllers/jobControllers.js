@@ -30,8 +30,8 @@ export const getAllJobs = async (req, res) => {
   }
 
   const sortOptions = {
-    newest: "-createdAt",
-    oldest: "createdAt",
+    newest: "-applicationDate",
+    oldest: "applicationDate",
     "a-z": "position",
     "z-a": "-position",
   };
@@ -92,6 +92,7 @@ export const deleteJob = async (req, res) => {
   res.status(200).json({ msg: "job deleted", removedJob: removedJob });
 };
 
+//stats
 export const showStats = async (req, res) => {
   let stats = await jobModel.aggregate([
     { $match: { createdBy: new mongoose.Types.ObjectId(req.user.userId) } }, //matching stage - get jobs assoc with user
@@ -117,7 +118,10 @@ export const showStats = async (req, res) => {
     { $match: { createdBy: new mongoose.Types.ObjectId(req.user.userId) } },
     {
       $group: {
-        _id: { year: { $year: "$createdAt" }, month: { $month: "$createdAt" } }, //grouping data by year and month -> sum jobs
+        _id: {
+          year: { $year: "$applicationDate" },
+          month: { $month: "$applicationDate" },
+        }, //grouping data by year and month -> sum jobs
         count: { $sum: 1 },
       },
     },

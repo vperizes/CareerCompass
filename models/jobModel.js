@@ -24,6 +24,10 @@ const JobSchema = new Schema(
       type: mongoose.Types.ObjectId, //points to mongo id
       ref: "User",
     },
+    applicationDate: {
+      type: Date,
+      default: new Date("<YYYY-mm-dd>"),
+    },
   },
   { timestamps: true }
 );

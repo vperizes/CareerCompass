@@ -45,6 +45,9 @@ export const validateJobInput = withValidationErrors([
   body("jobType")
     .isIn(Object.values(JOB_TYPE))
     .withMessage("invalid type value"),
+  body("applicationDate")
+    .notEmpty()
+    .withMessage("application date is required"),
 ]);
 
 export const validateIdParam = withValidationErrors([
