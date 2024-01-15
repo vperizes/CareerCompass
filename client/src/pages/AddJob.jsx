@@ -26,6 +26,8 @@ export const createJobAction =
 const AddJob = () => {
   const { user } = useOutletContext();
 
+  const maxDate = new Date().toISOString().split("T")[0];
+
   return (
     <Wrapper>
       <Form method="post" className="form">
@@ -33,6 +35,12 @@ const AddJob = () => {
         <div className="form-center">
           <FormInput type="text" name="position" />
           <FormInput type="text" name="company" />
+          <FormInput
+            type="date"
+            name="applicationDate"
+            labelText="Application Date"
+            max={maxDate}
+          />
           <FormInput type="text" name="jobLocation" labelText="Job Location" />
           <FormInputSelect
             name="jobStatus"

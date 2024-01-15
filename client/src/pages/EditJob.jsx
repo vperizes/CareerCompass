@@ -49,6 +49,8 @@ export const editJobAction =
 const EditJob = () => {
   const id = useLoaderData();
 
+  const maxDate = new Date().toISOString().split("T")[0];
+
   const {
     data: { job },
   } = useQuery(singleJobQuery(id));
@@ -60,6 +62,13 @@ const EditJob = () => {
         <div className="form-center">
           <FormInput type="text" name="position" defaultValue={job.position} />
           <FormInput type="text" name="company" defaultValue={job.company} />
+          <FormInput
+            type="date"
+            name="applicationDate"
+            labelText="Application Date"
+            defaultValue={job.applicationDate}
+            max={maxDate}
+          />
           <FormInput
             type="text"
             name="jobLocation"
