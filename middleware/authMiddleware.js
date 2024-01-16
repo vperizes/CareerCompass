@@ -13,7 +13,7 @@ export const authenticateUser = (req, res, next) => {
 
   try {
     const { userId, role } = verifyJWT(token);
-    const demoUser = userId === "658db88134c655f75b0d6dbb";
+    const demoUser = userId === "65a6c4ec34822589db6cba3d";
     //creating new object property on req body
     req.user = { userId, role, demoUser };
     next();

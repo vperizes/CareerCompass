@@ -26,7 +26,7 @@ const Login = () => {
   const demoUserLogin = async () => {
     const data = {
       email: "test@test.com",
-      password: "secret123",
+      password: "secret123$",
     };
     try {
       await axios.post("/api/v1/auth/login", data);
