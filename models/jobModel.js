@@ -26,7 +26,6 @@ const JobSchema = new Schema(
     },
     applicationDate: {
       type: Date,
-      default: new Date("<YYYY-mm-dd>"),
     },
   },
   { timestamps: true }

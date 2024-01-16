@@ -2,9 +2,10 @@ import { FaLocationArrow, FaBriefcase, FaCalendarAlt } from "react-icons/fa";
 import { Link, Form } from "react-router-dom";
 import Wrapper from "../assets/wrappers/Job";
 import JobInfo from "./JobInfo";
-import day from "dayjs";
+import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
-day.extend(advancedFormat);
+
+dayjs.extend(advancedFormat);
 
 const Job = ({
   _id,
@@ -15,7 +16,9 @@ const Job = ({
   jobLocation,
   applicationDate,
 }) => {
-  const date = day(applicationDate).format("MMM D, YYYY");
+  let date = applicationDate.toString().split("T")[0];
+  date = dayjs(date).format("MMM D, YYYY");
+
   return (
     <Wrapper>
       <header>
