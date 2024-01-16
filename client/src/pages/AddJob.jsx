@@ -5,6 +5,13 @@ import { JOB_STATUS, JOB_TYPE } from "../../../utils/constants";
 import { Form, redirect } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
+import dayjs from "dayjs";
+import timeZone from "dayjs/plugin/timezone";
+import utc from "dayjs/plugin/utc";
+import advancedFormat from "dayjs/plugin/advancedFormat";
+dayjs.extend(utc);
+dayjs.extend(timeZone);
+dayjs.extend(advancedFormat);
 
 export const createJobAction =
   (queryClient) =>
@@ -25,8 +32,10 @@ export const createJobAction =
 
 const AddJob = () => {
   const { user } = useOutletContext();
-
-  const maxDate = new Date().toISOString().split("T")[0];
+  const userTimezone = dayjs.tz.guess();
+  const maxDate = new Date();
+  const relativeMaxDate = dayjs(maxDate).tz(userTimezone).format("YYYY-MM-DD");
+  //const maxDate = new Date().toISOString().split("T")[0];
 
   return (
     <Wrapper>
@@ -39,7 +48,7 @@ const AddJob = () => {
             type="date"
             name="applicationDate"
             labelText="Application Date"
-            max={maxDate}
+            max={relativeMaxDate}
           />
           <FormInput type="text" name="jobLocation" labelText="Job Location" />
           <FormInputSelect

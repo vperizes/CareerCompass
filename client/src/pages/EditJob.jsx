@@ -6,6 +6,11 @@ import { Form, redirect } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
+import dayjs from "dayjs";
+import timeZone from "dayjs/plugin/timezone";
+import utc from "dayjs/plugin/utc";
+dayjs.extend(utc);
+dayjs.extend(timeZone);
 
 const singleJobQuery = (id) => {
   return {
@@ -48,8 +53,10 @@ export const editJobAction =
 
 const EditJob = () => {
   const id = useLoaderData();
-
-  const maxDate = new Date().toISOString().split("T")[0];
+  const userTimezone = dayjs.tz.guess();
+  const maxDate = new Date();
+  const relativeMaxDate = dayjs(maxDate).tz(userTimezone).format("YYYY-MM-DD");
+  //const maxDate = new Date().toISOString().split("T")[0];
 
   const {
     data: { job },
@@ -67,7 +74,7 @@ const EditJob = () => {
             name="applicationDate"
             labelText="Application Date"
             defaultValue={job.applicationDate}
-            max={maxDate}
+            max={relativeMaxDate}
           />
           <FormInput
             type="text"
