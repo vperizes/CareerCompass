@@ -179,7 +179,7 @@ ul {
 .btn {
   cursor: pointer;
   color: var(--white);
-  background: var(--primary-600);
+  background: var(--primary-700);
   border: transparent;
   border-radius: var(--border-radius);
   letter-spacing: var(--letter-spacing);
