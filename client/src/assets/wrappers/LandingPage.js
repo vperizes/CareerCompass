@@ -18,7 +18,7 @@ const Wrapper = styled.section`
   h1 {
     font-weight: 700;
     span {
-      color: var(--primary-500);
+      color: var(--primary-800);
     }
     margin-bottom: 1.5rem;
   }

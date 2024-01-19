@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const Wrapper = styled.aside`
   display: none;
@@ -6,7 +6,7 @@ const Wrapper = styled.aside`
     display: block;
     box-shadow: 1px 0px 0px 0px rgba(0, 0, 0, 0.1);
     .sidebar-container {
-      background: var(--background-secondary-color);
+      background: var(--background-sidebar);
       min-height: 100vh;
       height: 100%;
       width: 250px;
@@ -42,7 +42,7 @@ const Wrapper = styled.aside`
     }
     .nav-link:hover {
       padding-left: 3rem;
-      color: var(--primary-500);
+      color: var(--primary-700);
       transition: var(--transition);
     }
     .icon {
@@ -52,7 +52,7 @@ const Wrapper = styled.aside`
       place-items: center;
     }
     .active {
-      color: var(--primary-500);
+      color: var(--primary-700);
     }
     .pending {
       background: var(--background-color);

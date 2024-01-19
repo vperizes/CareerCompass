@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const Wrapper = styled.section`
+  border: 0.1rem solid var(--primary-800);
   border-radius: var(--border-radius);
   width: 100%;
   background: var(--background-secondary-color);

@@ -17,12 +17,11 @@ const Landing = () => {
           <p>
             Welcome to Career Compass – Your Ultimate Job Search Organizer!{" "}
             <br />
-            Embark on your job search journey with confidence and ease, thanks
-            to Career Compass! In the competitive landscape of job hunting,
-            staying organized is the key to success. Our user-friendly app helps
-            you keep a meticulous record of every position you apply for, the
-            corresponding company details, and the current status of your
-            application – all in one place.
+            In the competitive landscape of job hunting, staying organized is
+            the key to success. Our user-friendly app helps you keep a
+            meticulous record of every position you apply for, the corresponding
+            company details, and the current status of your application – all in
+            one place.
           </p>
           <Link to="/register" className="btn register-link">
             register
