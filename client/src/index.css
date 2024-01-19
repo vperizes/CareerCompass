@@ -14,16 +14,16 @@ html {
 
 :root {
   /* colors */
-  --primary-50: #fcf5f3;
-  --primary-100: #f9e2da;
-  --primary-200: #f5cfc1;
-  --primary-300: #efbda8;
-  --primary-400: #e7ab8f;
-  --primary-500: #de9a76;
-  --primary-600: #d4895d;
-  --primary-700: #c87943;
-  --primary-800: #bb6928;
-  --primary-900: #ad5a01;
+  --primary-50: #f2e0ff;
+  --primary-100: #e0c8f3;
+  --primary-200: #cfb0e7;
+  --primary-300: #bd98db;
+  --primary-400: #ab81cf;
+  --primary-500: #996ac3;
+  --primary-600: #8653b7;
+  --primary-700: #733cab;
+  --primary-800: #5f249f;
+  --primary-900: #4a0193;
 
   /* grey */
   --grey-50: #f8fafc;
@@ -65,16 +65,16 @@ html {
     0 10px 10px -5px rgba(0, 0, 0, 0.04);
   /* DARK MODE */
 
-  --dark-mode-bg-color: #2f2f2f;
+  --dark-mode-bg-color: #121212;
   --dark-mode-text-color: #f7f1ea;
-  --dark-mode-bg-secondary-color: #3f3f3f;
-  --dark-mode-bg-sidebar: #1b1b1b;
+  --dark-mode-bg-secondary-color: #1e1e1e;
+  --dark-mode-bg-sidebar: #1e1e1e;
   --dark-mode-text-secondary-color: var(--grey-300);
 
   --background-color: var(--grey-50);
   --text-color: var(--grey-900);
   --background-secondary-color: var(--white);
-  --background-sidebar: var(--primary-200);
+  --background-sidebar: var(--primary-50);
   --text-secondary-color: var(--grey-600);
 }
 
