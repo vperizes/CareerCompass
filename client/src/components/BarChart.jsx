@@ -15,8 +15,13 @@ const BarChartComponent = ({ data }) => {
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="date" />
         <YAxis allowDecimals={false} />
-        <Tooltip contentStyle={{ backgroundColor: "#1e293b" }} cursor={false} />
-        <Bar dataKey="count" stroke="#2cb1bc" fill="#b3f8fd" barSize={100} />
+        <Tooltip
+          contentStyle={{ backgroundColor: "#733cab", color: "#f8fafc" }} //specifically changes date text color and hover background
+          itemStyle={{ color: "#f8fafc" }} //specifically changes color of count text
+          cursor={false}
+        />
+        {/* stroke = --primary-600, fill = --grey-600 */}
+        <Bar dataKey="count" stroke="#8653b7" fill="#646470" barSize={100} />
       </BarChart>
     </ResponsiveContainer>
   );
