@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const Wrapper = styled.article`
+  border: var(--border-job-card);
   background: var(--background-secondary-color);
   border-radius: var(--border-radius);
   display: grid;
