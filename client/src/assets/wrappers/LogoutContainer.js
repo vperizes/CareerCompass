@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const Wrapper = styled.div`
   position: relative;
@@ -22,7 +22,7 @@ const Wrapper = styled.div`
     text-align: center;
     visibility: hidden;
     border-radius: var(--border-radius);
-    background: var(--primary-500);
+    background: var(--primary-700);
   }
   .show-dropdown {
     visibility: visible;
@@ -38,6 +38,9 @@ const Wrapper = styled.div`
     cursor: pointer;
     width: 100%;
     height: 100%;
+  }
+  .dropdown-btn:hover {
+    background-color: var(--primary-800);
   }
 `;
 

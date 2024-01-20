@@ -6,7 +6,11 @@ const ThemeToggle = () => {
   const { isDarkTheme, toggleDarkTheme } = useDashboardContext();
   return (
     <Wrapper onClick={toggleDarkTheme}>
-      {isDarkTheme ? <BsFillSunFill /> : <BsFillMoonFill />}
+      {isDarkTheme ? (
+        <BsFillSunFill className="toggle-icon" />
+      ) : (
+        <BsFillMoonFill className="toggle-icon" />
+      )}
     </Wrapper>
   );
 };
