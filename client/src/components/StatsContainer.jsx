@@ -1,4 +1,9 @@
-import { FaSuitcaseRolling, FaCalendarCheck, FaBug } from "react-icons/fa";
+import {
+  FaSuitcaseRolling,
+  FaCalendarCheck,
+  FaRegTimesCircle,
+  FaGem,
+} from "react-icons/fa";
 import Wrapper from "../assets/wrappers/StatsContainer";
 import StatItem from "./StatItem";
 
@@ -21,14 +26,14 @@ const StatsContainer = ({ defaultStats }) => {
     {
       title: "declined applications",
       count: defaultStats?.declined || 0,
-      icon: <FaBug />,
+      icon: <FaRegTimesCircle />,
       color: "#d66a6a",
       bcgColor: "#ffeeee",
     },
     {
       title: "offers",
       count: defaultStats?.offer || 0,
-      icon: <FaSuitcaseRolling />,
+      icon: <FaGem />,
       color: "#2e6827",
       bcgColor: "#d4f5d9",
     },
