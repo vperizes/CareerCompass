@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const Wrapper = styled.section`
   min-height: 100vh;
@@ -18,7 +18,7 @@ const Wrapper = styled.section`
     margin-bottom: 1.38rem;
   }
   p {
-    margin-top: 1rem;
+    margin: 1rem auto;
     text-align: center;
     line-height: 1.5;
   }

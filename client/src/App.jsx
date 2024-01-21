@@ -15,6 +15,7 @@ import {
   Profile,
   Admin,
   EditJob,
+  ResetPassword,
 } from "./pages/index";
 
 //action and loader imports
@@ -71,6 +72,10 @@ const router = createBrowserRouter([
         path: "login",
         element: <Login />,
         action: loginAction(queryClient),
+      },
+      {
+        path: "reset-password",
+        element: <ResetPassword />,
       },
       {
         path: "dashboard",

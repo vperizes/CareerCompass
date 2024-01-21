@@ -3,6 +3,7 @@ import Wrapper from "../assets/wrappers/RegisterAndLoginPage";
 import { FormInput, Logo, SubmitBtn } from "../components";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useState } from "react";
 
 export const loginAction =
   (queryClient) =>
@@ -22,6 +23,7 @@ export const loginAction =
 
 const Login = () => {
   const navigate = useNavigate();
+  const [isLoginError, setIsLoginError] = useState(false);
 
   const demoUserLogin = async () => {
     const data = {
@@ -33,9 +35,12 @@ const Login = () => {
       toast.success("Demo started! Test out application");
       navigate("/dashboard");
     } catch (error) {
+      setIsLoginError(!isLoginError);
       toast.error(error?.response?.data?.msg);
+      return error;
     }
   };
+
   return (
     <Wrapper>
       <Form method="post" className="form">
@@ -43,6 +48,11 @@ const Login = () => {
         <h4>Login</h4>
         <FormInput type="email" name="email" />
         <FormInput type="password" name="password" />
+        <p>
+          <Link to="/reset-password" className="member-btn">
+            Forgot Password?
+          </Link>
+        </p>
         <SubmitBtn />
         <button type="button" className="btn btn-block" onClick={demoUserLogin}>
           Explore the App
