@@ -7,7 +7,7 @@ const ResetPassword = () => {
     <Wrapper>
       <Form method="post" className="form">
         <Logo />
-        <h4>Forgot your password?</h4>
+        <h5>Forgot your password?</h5>
         <p>
           Enter your email address and we will send you instructions to reset
           your password.

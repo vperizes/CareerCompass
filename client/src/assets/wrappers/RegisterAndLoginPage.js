@@ -13,7 +13,8 @@ const Wrapper = styled.section`
     max-width: 400px;
     border-top: 5px solid var(--primary-500);
   }
-  h4 {
+  h4,
+  h5 {
     text-align: center;
     margin-bottom: 1.38rem;
   }
