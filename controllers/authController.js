@@ -58,6 +58,7 @@ export const forgotPassword = async (req, res) => {
 
   const link = `http://localhost:5173/api/v1/auth/reset-password/${user._id}/${token}`;
   console.log(link);
+  res.status(StatusCodes.OK).json({ msg: "valid user. rest password" });
 };
 
 export const resetPassword = async (req, res) => {

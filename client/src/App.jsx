@@ -16,6 +16,7 @@ import {
   Admin,
   EditJob,
   ForgotPassword,
+  ResetPassword,
 } from "./pages/index";
 
 //action and loader imports
@@ -78,6 +79,10 @@ const router = createBrowserRouter([
         path: "forgot-password",
         element: <ForgotPassword />,
         action: forgotPasswordAction(queryClient),
+      },
+      {
+        path: "reset-password",
+        element: <ResetPassword />,
       },
       {
         path: "dashboard",

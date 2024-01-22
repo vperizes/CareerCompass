@@ -11,3 +11,4 @@ export { default as Profile } from "./Profile";
 export { default as Register } from "./Register";
 export { default as Stats } from "./Stats";
 export { default as ForgotPassword } from "./ForgotPassword";
+export { default as ResetPassword } from "./ResetPassword";
