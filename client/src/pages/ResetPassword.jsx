@@ -4,22 +4,6 @@ import Wrapper from "../assets/wrappers/RegisterAndLoginPage";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-// const singleUserQuery = (params) => {
-//   const { id, token } = params;
-//   return {
-//     queryKey: ["user", id, token],
-//     queryFn: async () => {
-//       const { data } = await axios.get(
-//         `/api/v1/auth/reset-password/${id}/${token}`,
-//         {
-//           params: params,
-//         }
-//       );
-//       return data;
-//     },
-//   };
-// };
-
 export const resetPasswordAction =
   (queryClient) =>
   async ({ request, params }) => {
