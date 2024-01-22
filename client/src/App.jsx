@@ -32,6 +32,7 @@ import { updateUserAction } from "./pages/Profile";
 import { statsLoader } from "./pages/Stats";
 import { forgotPasswordAction } from "./pages/ForgotPassword";
 import ErrorElement from "./components/ErrorElement";
+import { resetPasswordAction } from "./pages/ResetPassword";
 
 //looks for 'darkTheme' value in local storage and depending on value we'll add dark theme and set value as state value
 export const checkDefaultTheme = () => {
@@ -81,8 +82,9 @@ const router = createBrowserRouter([
         action: forgotPasswordAction(queryClient),
       },
       {
-        path: "reset-password",
+        path: "/reset-password/:id/:token",
         element: <ResetPassword />,
+        action: resetPasswordAction(queryClient),
       },
       {
         path: "dashboard",

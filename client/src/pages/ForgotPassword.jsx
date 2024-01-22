@@ -11,7 +11,7 @@ export const forgotPasswordAction =
     const data = Object.fromEntries(formData);
     try {
       await axios.post("/api/v1/auth/forgot-password", data);
-      return redirect("/reset-password");
+      return emailSent;
     } catch (error) {
       toast.error(error?.response?.data?.msg);
       return error;

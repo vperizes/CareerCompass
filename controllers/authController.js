@@ -60,7 +60,7 @@ export const forgotPassword = async (req, res) => {
     process.env.JWT_RESETPASS_EXPIRES_IN
   );
 
-  const link = `http://localhost:5173/api/v1/auth/reset-password/${user._id}/${token}`;
+  const link = `http://localhost:5173/reset-password/${user._id}/${token}`;
   console.log(link);
   res
     .status(StatusCodes.OK)
@@ -70,8 +70,9 @@ export const forgotPassword = async (req, res) => {
 export const resetPassword = async (req, res) => {
   const { id, token } = req.params;
   const { newPassword, confirmNewPassword } = req.body;
+  console.log(newPassword);
 
-  const user = await UserModel.findOne({ _id: id });
+  const user = await UserModel.findById(id);
 
   const secret = process.env.JWT_SECRET + user.password;
   //if verify is true and password match then encrypt new pass and update user
