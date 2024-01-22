@@ -1,7 +1,11 @@
 import { StatusCodes } from "http-status-codes";
 import UserModel from "../models/UserModel.js";
 import { comparePassword, hashPassword } from "../utils/passwordUtils.js";
-import { UnauthenticatedError, NotFoundError } from "../errors/customErrors.js";
+import {
+  UnauthenticatedError,
+  NotFoundError,
+  BadRequestError,
+} from "../errors/customErrors.js";
 import { createJWT } from "../utils/tokenUtils.js";
 import jwt from "jsonwebtoken";
 
@@ -58,23 +62,31 @@ export const forgotPassword = async (req, res) => {
 
   const link = `http://localhost:5173/api/v1/auth/reset-password/${user._id}/${token}`;
   console.log(link);
-  res.status(StatusCodes.OK).json({ msg: "valid user. rest password" });
+  res
+    .status(StatusCodes.OK)
+    .json({ msg: "valid user. reset password", userId: user._id, token });
 };
 
 export const resetPassword = async (req, res) => {
   const { id, token } = req.params;
+  const { newPassword, confirmNewPassword } = req.body;
+
   const user = await UserModel.findOne({ _id: id });
-  if (!user) {
-    throw new NotFoundError("User does not exist.");
-  }
+
   const secret = process.env.JWT_SECRET + user.password;
-  try {
-    const verify = jwt.verify(token, secret);
-    res.send("verify");
-  } catch (error) {
-    res.send("not verified");
+  //if verify is true and password match then encrypt new pass and update user
+  const verify = jwt.verify(token, secret);
+  const isResetValid = verify && newPassword === confirmNewPassword;
+  if (!isResetValid) {
+    throw new BadRequestError("Password could not be updated");
   }
-  console.log(req.params);
+  const newHashedPassword = await hashPassword(newPassword);
+  await UserModel.updateOne(
+    { _id: id },
+    { $set: { password: newHashedPassword } }
+  );
+
+  res.status(StatusCodes.OK).json({ msg: "password updated", user });
 };
 
 export const logout = async (req, res) => {

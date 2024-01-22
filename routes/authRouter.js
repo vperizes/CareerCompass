@@ -23,7 +23,7 @@ const apiLimiter = rateLimit({
 router.post("/register", apiLimiter, validateUserRegistration, register);
 router.post("/login", apiLimiter, validateUserLogin, login);
 router.post("/forgot-password", forgotPassword);
-router.get("/reset-password/:id/:token", resetPassword);
+router.post("/reset-password/:id/:token", resetPassword);
 router.get("/logout", logout);
 
 export default router;
