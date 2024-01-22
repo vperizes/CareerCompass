@@ -1,8 +1,9 @@
 import { StatusCodes } from "http-status-codes";
 import UserModel from "../models/UserModel.js";
 import { comparePassword, hashPassword } from "../utils/passwordUtils.js";
-import { UnauthenticatedError } from "../errors/customErrors.js";
+import { UnauthenticatedError, NotFoundError } from "../errors/customErrors.js";
 import { createJWT } from "../utils/tokenUtils.js";
+import jwt from "jsonwebtoken";
 
 export const register = async (req, res) => {
   const isFirstAccount = (await UserModel.countDocuments()) === 0;
@@ -23,7 +24,11 @@ export const login = async (req, res) => {
     throw new UnauthenticatedError("Invalid credentials");
   }
 
-  const token = createJWT({ userId: user._id, role: user.role });
+  const token = createJWT(
+    { userId: user._id, role: user.role },
+    process.env.JWT_SECRET,
+    process.env.JWT_EXPIRES_IN
+  );
 
   //one day in ms
   const oneDay = 1000 * 60 * 60 * 24;
@@ -35,6 +40,40 @@ export const login = async (req, res) => {
     secure: process.env.NODE_ENV === "production", //will return t if in production
   });
   res.status(StatusCodes.OK).json({ msg: "user logged in" });
+};
+
+export const forgotPassword = async (req, res) => {
+  const user = await UserModel.findOne({ email: req.body.email });
+  if (!user) {
+    throw new NotFoundError("Email does not exist.");
+  }
+
+  const secret = process.env.JWT_SECRET + user.password;
+
+  const token = createJWT(
+    { email: user.email, userId: user._id },
+    secret,
+    process.env.JWT_RESETPASS_EXPIRES_IN
+  );
+
+  const link = `http://localhost:5173/api/v1/auth/reset-password/${user._id}/${token}`;
+  console.log(link);
+};
+
+export const resetPassword = async (req, res) => {
+  const { id, token } = req.params;
+  const user = await UserModel.findOne({ _id: id });
+  if (!user) {
+    throw new NotFoundError("User does not exist.");
+  }
+  const secret = process.env.JWT_SECRET + user.password;
+  try {
+    const verify = jwt.verify(token, secret);
+    res.send("verify");
+  } catch (error) {
+    res.send("not verified");
+  }
+  console.log(req.params);
 };
 
 export const logout = async (req, res) => {

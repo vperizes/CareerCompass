@@ -1,5 +1,11 @@
 import { Router } from "express";
-import { login, logout, register } from "../controllers/authController.js";
+import {
+  login,
+  logout,
+  register,
+  forgotPassword,
+  resetPassword,
+} from "../controllers/authController.js";
 import {
   validateUserRegistration,
   validateUserLogin,
@@ -16,6 +22,8 @@ const apiLimiter = rateLimit({
 
 router.post("/register", apiLimiter, validateUserRegistration, register);
 router.post("/login", apiLimiter, validateUserLogin, login);
+router.post("/forgot-password", forgotPassword);
+router.get("/reset-password/:id/:token", resetPassword);
 router.get("/logout", logout);
 
 export default router;
