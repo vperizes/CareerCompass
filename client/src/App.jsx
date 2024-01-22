@@ -15,7 +15,7 @@ import {
   Profile,
   Admin,
   EditJob,
-  ResetPassword,
+  ForgotPassword,
 } from "./pages/index";
 
 //action and loader imports
@@ -29,6 +29,7 @@ import { deleteJobAction } from "./pages/DeleteJob";
 import { adminLoader } from "./pages/Admin";
 import { updateUserAction } from "./pages/Profile";
 import { statsLoader } from "./pages/Stats";
+import { forgotPasswordAction } from "./pages/ForgotPassword";
 import ErrorElement from "./components/ErrorElement";
 
 //looks for 'darkTheme' value in local storage and depending on value we'll add dark theme and set value as state value
@@ -74,8 +75,9 @@ const router = createBrowserRouter([
         action: loginAction(queryClient),
       },
       {
-        path: "reset-password",
-        element: <ResetPassword />,
+        path: "forgot-password",
+        element: <ForgotPassword />,
+        action: forgotPasswordAction(queryClient),
       },
       {
         path: "dashboard",
