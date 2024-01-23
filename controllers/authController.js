@@ -8,7 +8,7 @@ import {
 } from "../errors/customErrors.js";
 import { createJWT } from "../utils/tokenUtils.js";
 import jwt from "jsonwebtoken";
-import nodemailer from "nodemailer";
+import { sendResetEmail } from "../utils/email.js";
 
 export const register = async (req, res) => {
   const isFirstAccount = (await UserModel.countDocuments()) === 0;
@@ -61,45 +61,26 @@ export const forgotPassword = async (req, res) => {
     process.env.JWT_RESETPASS_EXPIRES_IN
   );
 
-  //const resetPasswordUrl = `http://localhost:5173/reset-password/${user._id}/${token}`;
   const resetPasswordUrl = `${req.protocol}://${req.get(
     "host"
   )}/reset-password/${user._id}/${token}`;
 
-  //create reusable transporter object using defulat SMTP transport
-  const transporter = nodemailer.createTransport({
-    service: process.env.SMTP_SERVICE,
-    host: process.env.SMTP_HOST,
-    port: process.env.SMTP_PORT,
-    secure: false,
-    auth: {
-      user: process.env.EMAIL,
-      pass: process.env.CC_APP_PASSWORD,
-    },
-  });
-
-  const mailOptions = {
-    from: {
-      name: "Career Compass",
-      address: process.env.EMAIL,
-    }, // sender address
-    to: user.email, // list of receivers
-    subject: "Career Compass - Password Reset", // Subject line
-    text: `Please click on the following link to change your password. This link will only be valid for 15 minutes.\n\n${resetPasswordUrl}`, // plain text body
-  };
-
-  const sendResetEmail = async (transporter, mailOptions) => {
-    try {
-      await transporter.sendMail(mailOptions);
-    } catch (error) {
-      console.log(error);
-      return error;
-    }
-  };
-
-  sendResetEmail(transporter, mailOptions);
-
-  res.status(StatusCodes.OK).json({ msg: "valid user. reset link sent" });
+  try {
+    //pass in option as object
+    await sendResetEmail({
+      userEmail: user.email,
+      emailSubject: "Career Compass - Password Reset",
+      emailText: `Please click on the following link to change your password. This link will only be valid for 15 minutes.\n\n${resetPasswordUrl}`,
+    });
+    return res
+      .status(StatusCodes.OK)
+      .json({ msg: "valid user. reset link sent" });
+  } catch (error) {
+    token = undefined;
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      msg: "There was an error sending password reset email. Please try again.",
+    });
+  }
 };
 
 export const resetPassword = async (req, res) => {
