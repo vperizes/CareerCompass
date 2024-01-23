@@ -1,4 +1,4 @@
-import { Form, Link, redirect } from "react-router-dom";
+import { Form, Link, useActionData } from "react-router-dom";
 import Wrapper from "../assets/wrappers/RegisterAndLoginPage";
 import { FormInput, Logo, SubmitBtn } from "../components";
 import axios from "axios";
@@ -11,7 +11,8 @@ export const forgotPasswordAction =
     const data = Object.fromEntries(formData);
     try {
       await axios.post("/api/v1/auth/forgot-password", data);
-      return emailSent;
+      toast.success(`An email has been sent to ${data.email}`);
+      return data;
     } catch (error) {
       toast.error(error?.response?.data?.msg);
       return error;
@@ -19,6 +20,9 @@ export const forgotPasswordAction =
   };
 
 const ForgotPassword = () => {
+  // const data = useActionData();
+  // console.log({ data });
+
   return (
     <Wrapper>
       <Form method="post" className="form">
