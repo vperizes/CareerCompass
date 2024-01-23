@@ -15,7 +15,7 @@ export const resetPasswordAction =
         data
       );
       queryClient.invalidateQueries(["user"]); //need to invalidate user data
-      toast.success("Passwrod reset successful!");
+      toast.success("Password reset successful!");
       return redirect("/login");
     } catch (error) {
       toast.error(error?.response?.data?.msg);
