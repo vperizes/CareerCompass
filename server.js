@@ -7,7 +7,7 @@ import * as dotenv from "dotenv";
 import cloudinary from "cloudinary";
 import helmet from "helmet";
 import mongoSanitize from "express-mongo-sanitize";
-import http from "http";
+import https from "https";
 
 dotenv.config();
 const app = express();
@@ -84,10 +84,10 @@ app.use(errorHandlerMiddleware);
 //code to make request to render (keep server from spinning down)
 const makeRequest = () => {
   // Replace 'example.com' with the actual domain of the website you want to ping
-  const url = "http://localhost:5173/";
+  const url = "https://careercompass-0z1a.onrender.com/";
 
   try {
-    http
+    https
       .get(url, (response) => {
         let data = "";
 
