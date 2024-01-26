@@ -81,5 +81,5 @@ app.use("*", (req, res) => {
 //express-async package handles async errors and passes them to this middleware without needing try-catch block
 app.use(errorHandlerMiddleware);
 
-// Call request function every 15 minutes to avid server spin down
-setInterval(makeRequest, 1000 * 60 * 15);
+// Call request function every 14.5 minutes to avid server spin down
+setInterval(makeRequest, 1000 * 62 * 14);
