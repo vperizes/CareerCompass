@@ -7,7 +7,7 @@ import * as dotenv from "dotenv";
 import cloudinary from "cloudinary";
 import helmet from "helmet";
 import mongoSanitize from "express-mongo-sanitize";
-import https from "https";
+import { makeRequest } from "./utils/avoidSpinDown.js";
 
 dotenv.config();
 const app = express();
@@ -81,33 +81,5 @@ app.use("*", (req, res) => {
 //express-async package handles async errors and passes them to this middleware without needing try-catch block
 app.use(errorHandlerMiddleware);
 
-//code to make request to render (keep server from spinning down)
-const makeRequest = () => {
-  // Replace 'example.com' with the actual domain of the website you want to ping
-  const url = "https://careercompass-0z1a.onrender.com/";
-
-  try {
-    https
-      .get(url, (response) => {
-        let data = "";
-
-        // A chunk of data has been received.
-        response.on("data", (chunk) => {
-          data += chunk;
-        });
-
-        // The whole response has been received.
-        response.on("end", () => {
-          console.log("Request successful:", data);
-        });
-      })
-      .on("error", (error) => {
-        console.error("Error making request:", error.message);
-      });
-  } catch (error) {
-    console.error("Caught an exception:", error.message);
-  }
-};
-
-// Set up the interval to call the function every 14 minutes (14 * 60 * 1000 milliseconds)
-setInterval(makeRequest, 1000 * 60 * 14);
+// Call request function every 15 minutes to avid server spin down
+setInterval(makeRequest, 1000 * 60 * 15);
