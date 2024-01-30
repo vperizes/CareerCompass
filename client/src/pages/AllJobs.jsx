@@ -28,7 +28,6 @@ const allJobsQuery = (params) => {
 export const allJobsLoader =
   (queryClient) =>
   async ({ request }) => {
-    queryClient.invalidateQueries(["jobs"]);
     //make params into object
     const params = Object.fromEntries([
       ...new URL(request.url).searchParams.entries(),

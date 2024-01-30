@@ -42,7 +42,7 @@ export const editJobAction =
 
     try {
       await axios.patch(`/api/v1/jobs/${params.id}`, data);
-      queryClient.invalidateQueries(["job"]);
+      queryClient.invalidateQueries(["jobs"]);
       toast.success("Job edited successfully");
       return redirect("/dashboard/all-jobs");
     } catch (error) {
