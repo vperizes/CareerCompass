@@ -48,6 +48,7 @@ export const validateJobInput = withValidationErrors([
   body("applicationDate")
     .notEmpty()
     .withMessage("application date is required"),
+  body("applicationNote").optional().default("Add a note"),
 ]);
 
 export const validateIdParam = withValidationErrors([

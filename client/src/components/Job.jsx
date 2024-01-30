@@ -40,8 +40,12 @@ const Job = ({
           <JobInfo icon={<FaCalendarAlt />} text={date} />
           <JobInfo icon={<FaBriefcase />} text={jobType} />
           <div className={`status ${jobStatus}`}>{jobStatus}</div>
-          <JobInfo icon={<FaPencilAlt />} text={applicationNote} />
         </div>
+        <JobInfo
+          icon={<FaPencilAlt />}
+          text={applicationNote}
+          className="note"
+        />
         <footer className="actions">
           <Link to={`/dashboard/edit-job/${_id}`} className="btn edit-btn">
             Edit
