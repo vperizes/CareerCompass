@@ -9,6 +9,7 @@ export const JOB_TYPE = {
   full_time: "Full time",
   part_time: "Part time",
   internship: "Internship",
+  contract: "Contract",
 };
 
 export const JOB_SORT_BY = {
