@@ -27,6 +27,7 @@ const JobSchema = new Schema(
     applicationDate: {
       type: Date,
     },
+    applicationNote: String,
   },
   { timestamps: true }
 );

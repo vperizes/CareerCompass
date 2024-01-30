@@ -63,6 +63,12 @@ const AddJob = () => {
             defaultValue={JOB_TYPE.full_time}
             list={Object.values(JOB_TYPE)}
           />
+          <FormInput
+            type="text"
+            name="applicationNote"
+            labelText="Note"
+            defaultValue="Add a note..."
+          />
           <SubmitBtn formBtn />
         </div>
       </Form>

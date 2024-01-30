@@ -1,4 +1,9 @@
-import { FaLocationArrow, FaBriefcase, FaCalendarAlt } from "react-icons/fa";
+import {
+  FaLocationArrow,
+  FaBriefcase,
+  FaCalendarAlt,
+  FaPencilAlt,
+} from "react-icons/fa";
 import { Link, Form } from "react-router-dom";
 import Wrapper from "../assets/wrappers/Job";
 import JobInfo from "./JobInfo";
@@ -15,6 +20,7 @@ const Job = ({
   jobType,
   jobLocation,
   applicationDate,
+  applicationNote,
 }) => {
   let date = applicationDate.toString().split("T")[0];
   date = dayjs(date).format("MMM D, YYYY");
@@ -34,6 +40,7 @@ const Job = ({
           <JobInfo icon={<FaCalendarAlt />} text={date} />
           <JobInfo icon={<FaBriefcase />} text={jobType} />
           <div className={`status ${jobStatus}`}>{jobStatus}</div>
+          <JobInfo icon={<FaPencilAlt />} text={applicationNote} />
         </div>
         <footer className="actions">
           <Link to={`/dashboard/edit-job/${_id}`} className="btn edit-btn">

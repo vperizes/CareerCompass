@@ -94,6 +94,12 @@ const EditJob = () => {
             defaultValue={job.JOB_TYPE}
             list={Object.values(JOB_TYPE)}
           />
+          <FormInput
+            type="text"
+            name="applicationNote"
+            labelText="Note"
+            defaultValue={job.applicationNote}
+          />
           <SubmitBtn formBtn />
         </div>
       </Form>
