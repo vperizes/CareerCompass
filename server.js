@@ -82,4 +82,6 @@ app.use("*", (req, res) => {
 app.use(errorHandlerMiddleware);
 
 // Call request function every 14.5 minutes to avid server spin down
-setInterval(makeRequest, 1000 * 62 * 14);
+if (process.env.NODE_ENV !== "development") {
+  setInterval(makeRequest, 1000 * 62 * 14);
+}
