@@ -73,7 +73,7 @@ const EditJob = () => {
             type="date"
             name="applicationDate"
             labelText="Application Date"
-            defaultValue={job.applicationDate}
+            defaultValue={job.applicationDate.split("T")[0]}
             max={relativeMaxDate}
           />
           <FormInput
