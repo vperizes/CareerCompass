@@ -62,10 +62,6 @@ const Wrapper = styled.article`
     display: grid;
     align-items: center;
   }
-  .note {
-    display: grid;
-    grid-template-columns: 2fr;
-  }
   .actions {
     margin-top: 1rem;
     display: flex;
