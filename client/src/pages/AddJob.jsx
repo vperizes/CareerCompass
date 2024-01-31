@@ -1,4 +1,9 @@
-import { FormInput, FormInputSelect, SubmitBtn } from "../components/index";
+import {
+  FormInput,
+  FormInputSelect,
+  SubmitBtn,
+  Note,
+} from "../components/index";
 import Wrapper from "../assets/wrappers/DashboardFormPage";
 import { useOutletContext } from "react-router-dom";
 import { JOB_STATUS, JOB_TYPE } from "../../../utils/constants";
@@ -63,12 +68,7 @@ const AddJob = () => {
             defaultValue={JOB_TYPE.full_time}
             list={Object.values(JOB_TYPE)}
           />
-          <FormInput
-            type="text"
-            name="applicationNote"
-            labelText="Note"
-            defaultValue="Add a note..."
-          />
+          <Note type="text" name="applicationNote" labelText="Note" />
           <SubmitBtn formBtn />
         </div>
       </Form>

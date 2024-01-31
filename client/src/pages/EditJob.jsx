@@ -1,4 +1,9 @@
-import { FormInput, FormInputSelect, SubmitBtn } from "../components";
+import {
+  FormInput,
+  FormInputSelect,
+  SubmitBtn,
+  Note,
+} from "../components/index";
 import Wrapper from "../assets/wrappers/DashboardFormPage";
 import { useLoaderData } from "react-router-dom";
 import { JOB_STATUS, JOB_TYPE } from "../../../utils/constants";
@@ -94,7 +99,7 @@ const EditJob = () => {
             defaultValue={job.JOB_TYPE}
             list={Object.values(JOB_TYPE)}
           />
-          <FormInput
+          <Note
             type="text"
             name="applicationNote"
             labelText="Note"
