@@ -40,7 +40,6 @@ const AddJob = () => {
   const userTimezone = dayjs.tz.guess();
   const maxDate = new Date();
   const relativeMaxDate = dayjs(maxDate).tz(userTimezone).format("YYYY-MM-DD");
-  //const maxDate = new Date().toISOString().split("T")[0];
 
   return (
     <Wrapper>

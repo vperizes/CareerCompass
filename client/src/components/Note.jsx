@@ -7,6 +7,7 @@ const Note = ({ name, labelText, defaultValue }) => {
       <textarea
         className="form-input note-input"
         id={name}
+        name={name}
         type="text"
         defaultValue={defaultValue}
         placeholder="Add a note..."

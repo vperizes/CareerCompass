@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const Wrapper = styled.div`
   display: flex;
@@ -15,6 +15,10 @@ const Wrapper = styled.div`
   .job-text {
     text-transform: capitalize;
     letter-spacing: var(--letter-spacing);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 700px;
   }
 `;
 export default Wrapper;
