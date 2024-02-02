@@ -312,12 +312,12 @@ button:disabled {
 
 .note-input {
   resize: vertical;
-  min-height: 50px;
+  min-height: 100px;
 }
 
 @media (min-width: 992px) {
   .note {
-    grid-column: span 2;
+    grid-column: span 3;
   }
 }
 
