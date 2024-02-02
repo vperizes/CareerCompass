@@ -1,7 +1,9 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const Wrapper = styled.section`
   margin-top: 4rem;
+  width: 100%;
+  overflow: hidden; /* Hide content that exceeds the container's width */
   h2 {
     text-transform: none;
   }
