@@ -15,10 +15,14 @@ const Wrapper = styled.div`
   .job-text {
     text-transform: capitalize;
     letter-spacing: var(--letter-spacing);
-    white-space: nowrap;
+  }
+
+  .note-text {
+    width: 100%;
     overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 700px;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    display: -webkit-box;
   }
 `;
 export default Wrapper;

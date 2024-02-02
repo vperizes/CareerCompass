@@ -7,6 +7,8 @@ const Wrapper = styled.article`
   display: grid;
   grid-template-rows: 1fr auto;
   box-shadow: var(--shadow-2);
+  max-width: 100%; /* Set a max-width for the job component */
+  overflow: hidden; /* Hide content that exceeds the component's width */
   header {
     padding: 1rem 1.5rem;
     border-bottom: 1px solid var(--grey-100);
@@ -62,6 +64,7 @@ const Wrapper = styled.article`
     display: grid;
     align-items: center;
   }
+
   .actions {
     margin-top: 1rem;
     display: flex;
