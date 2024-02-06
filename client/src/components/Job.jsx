@@ -42,7 +42,6 @@ const Job = ({
           <div className={`status ${jobStatus}`}>{jobStatus}</div>
         </div>
         <JobInfo icon={<FaPencilAlt />} text={applicationNote} isNote />
-
         <footer className="actions">
           <Link to={`/dashboard/edit-job/${_id}`} className="btn edit-btn">
             Edit
