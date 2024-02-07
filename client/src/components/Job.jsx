@@ -22,11 +22,12 @@ const Job = ({
   jobLocation,
   applicationDate,
   applicationNote,
+  selected,
+  handleSelectJob,
 }) => {
   let date = applicationDate.toString().split("T")[0];
   date = dayjs(date).format("MMM D, YYYY");
-
-  const [expanded, setExpanded] = useState(false);
+  const clickedNote = selected === _id;
 
   return (
     <Wrapper>
@@ -44,20 +45,19 @@ const Job = ({
           <JobInfo icon={<FaBriefcase />} text={jobType} />
           <div className={`status ${jobStatus}`}>{jobStatus}</div>
         </div>
-        <div className="accordian">
+        <div
+          className="accordian"
+          onClick={() => {
+            handleSelectJob(_id);
+          }}
+        >
           <JobInfo
             icon={<FaPencilAlt />}
             text={applicationNote}
             isNote
-            expanded={expanded}
+            clickedNote={clickedNote}
           />
-          <button
-            onClick={() => {
-              setExpanded(!expanded);
-            }}
-          >
-            {expanded ? "-" : "+"}
-          </button>
+          <button>{clickedNote ? "-" : "+"}</button>
         </div>
 
         <footer className="actions">

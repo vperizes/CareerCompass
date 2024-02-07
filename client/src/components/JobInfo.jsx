@@ -1,12 +1,12 @@
 import Wrapper from "../assets/wrappers/JobInfo";
-const JobInfo = ({ icon, text, isNote, expanded }) => {
+const JobInfo = ({ icon, text, isNote, clickedNote }) => {
   return (
     <Wrapper>
       <span className="job-icon">{icon}</span>
       {isNote ? (
         <span
           className={
-            expanded ? "job-text note-text show" : "job-text note-text"
+            clickedNote ? "job-text note-text show" : "job-text note-text"
           }
         >
           {text}
