@@ -321,6 +321,14 @@ button:disabled {
   }
 }
 
+.expanded {
+  justify-content: space-evenly;
+  align-items: center;
+  width: 70vw;
+  grid-column: 1 / span 2;
+  grid-row: auto;
+}
+
 /* title */
 
 .title {

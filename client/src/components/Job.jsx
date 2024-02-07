@@ -30,7 +30,7 @@ const Job = ({
   const clickedNote = selected === _id;
 
   return (
-    <Wrapper>
+    <Wrapper className={clickedNote && "expanded"}>
       <header>
         <div className="main-icon">{company.charAt(0)}</div>
         <div className="info">
