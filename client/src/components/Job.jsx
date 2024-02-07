@@ -9,6 +9,7 @@ import Wrapper from "../assets/wrappers/Job";
 import JobInfo from "./JobInfo";
 import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
+import { useState } from "react";
 
 dayjs.extend(advancedFormat);
 
@@ -24,6 +25,8 @@ const Job = ({
 }) => {
   let date = applicationDate.toString().split("T")[0];
   date = dayjs(date).format("MMM D, YYYY");
+
+  const [expanded, setExpanded] = useState(false);
 
   return (
     <Wrapper>
@@ -41,7 +44,22 @@ const Job = ({
           <JobInfo icon={<FaBriefcase />} text={jobType} />
           <div className={`status ${jobStatus}`}>{jobStatus}</div>
         </div>
-        <JobInfo icon={<FaPencilAlt />} text={applicationNote} isNote />
+        <div className="accordian">
+          <JobInfo
+            icon={<FaPencilAlt />}
+            text={applicationNote}
+            isNote
+            expanded={expanded}
+          />
+          <button
+            onClick={() => {
+              setExpanded(!expanded);
+            }}
+          >
+            {expanded ? "-" : "+"}
+          </button>
+        </div>
+
         <footer className="actions">
           <Link to={`/dashboard/edit-job/${_id}`} className="btn edit-btn">
             Edit

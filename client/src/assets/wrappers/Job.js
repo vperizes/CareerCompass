@@ -80,6 +80,14 @@ const Wrapper = styled.article`
   .edit-btn {
     margin-right: 0.5rem;
   }
+
+  .accordian {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    cursor: pointer;
+  }
 `;
 
 export default Wrapper;
