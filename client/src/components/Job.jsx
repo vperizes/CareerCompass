@@ -57,7 +57,7 @@ const Job = ({
             isNote
             clickedNote={clickedNote}
           />
-          <button>{clickedNote ? "-" : "+"}</button>
+          <button className="btn">{clickedNote ? "-" : "+"}</button>
         </div>
 
         <footer className="actions">
