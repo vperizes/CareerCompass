@@ -316,17 +316,15 @@ button:disabled {
 }
 
 .expanded {
-  width: auto;
   grid-column: auto;
   grid-row: auto;
 }
 
-@media (min-width: 992px) {
+@media (min-width: 990px) {
   .note {
     grid-column: span 3;
   }
   .expanded {
-    width: 70vw;
     grid-column: 1 / span 2;
   }
 }
