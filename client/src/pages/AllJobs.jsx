@@ -3,6 +3,7 @@ import { useLoaderData } from "react-router-dom";
 import { JobsContainer, SearchContainer } from "../components";
 import { createContext, useContext } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { motion } from "framer-motion";
 
 //allJobsQuery is a function to support dynamic params
 const allJobsQuery = (params) => {
@@ -46,7 +47,9 @@ const AllJobs = () => {
   return (
     <AllJobsContext.Provider value={{ data, searchValues }}>
       <SearchContainer />
-      <JobsContainer />
+      <motion.div layout="position">
+        <JobsContainer />
+      </motion.div>
     </AllJobsContext.Provider>
   );
 };

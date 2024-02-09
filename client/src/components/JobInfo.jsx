@@ -1,18 +1,19 @@
 import Wrapper from "../assets/wrappers/JobInfo";
+import { motion } from "framer-motion";
 const JobInfo = ({ icon, text, isNote, clickedNote }) => {
   return (
     <Wrapper>
-      <span className="job-icon">{icon}</span>
+      <motion.span className="job-icon">{icon}</motion.span>
       {isNote ? (
-        <span
+        <motion.span
           className={
             clickedNote ? "job-text note-text show" : "job-text note-text"
           }
         >
           {text}
-        </span>
+        </motion.span>
       ) : (
-        <span className="job-text">{text}</span>
+        <motion.span className="job-text">{text}</motion.span>
       )}
     </Wrapper>
   );

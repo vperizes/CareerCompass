@@ -3,6 +3,7 @@ import Wrapper from "../assets/wrappers/JobsContainer";
 import { useAllJobsContext } from "../pages/AllJobs";
 import Job from "./Job";
 import PageBtnContainer from "./PageBtnContainer";
+import { motion } from "framer-motion";
 
 const JobsContainer = () => {
   const { data } = useAllJobsContext();
@@ -26,10 +27,10 @@ const JobsContainer = () => {
   }
   return (
     <Wrapper>
-      <h5>
+      <motion.h5 layout>
         {totalJobs} {jobs.length > 1 ? "jobs" : "job"} found
-      </h5>
-      <div className="jobs">
+      </motion.h5>
+      <motion.div layout="position" className="jobs">
         {jobs.map((job) => {
           return (
             <Job
@@ -40,7 +41,7 @@ const JobsContainer = () => {
             />
           );
         })}
-      </div>
+      </motion.div>
       {numOfPages > 1 && <PageBtnContainer />}
     </Wrapper>
   );

@@ -9,7 +9,7 @@ import Wrapper from "../assets/wrappers/Job";
 import JobInfo from "./JobInfo";
 import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
-import { useState } from "react";
+import { motion } from "framer-motion";
 
 dayjs.extend(advancedFormat);
 
@@ -31,21 +31,26 @@ const Job = ({
 
   return (
     <Wrapper className={clickedNote && "expanded"}>
-      <header>
-        <div className="main-icon">{company.charAt(0)}</div>
-        <div className="info">
-          <h5>{position}</h5>
-          <p>{company}</p>
-        </div>
-      </header>
-      <div className="content">
-        <div className="content-center">
+      <motion.header layout>
+        <motion.div className="main-icon">{company.charAt(0)}</motion.div>
+        <motion.div className="info">
+          <motion.h5>{position}</motion.h5>
+          <motion.p>{company}</motion.p>
+        </motion.div>
+      </motion.header>
+      <motion.div
+        layout
+        transition={{ layout: { duration: 0.75, type: "spring" } }}
+        className="content"
+      >
+        <motion.div layout="position" className="content-center">
           <JobInfo icon={<FaLocationArrow />} text={jobLocation} />
           <JobInfo icon={<FaCalendarAlt />} text={date} />
           <JobInfo icon={<FaBriefcase />} text={jobType} />
-          <div className={`status ${jobStatus}`}>{jobStatus}</div>
-        </div>
-        <div
+          <motion.div className={`status ${jobStatus}`}>{jobStatus}</motion.div>
+        </motion.div>
+        <motion.div
+          layout="position"
           className="accordian"
           onClick={() => {
             handleSelectJob(_id);
@@ -57,8 +62,8 @@ const Job = ({
             isNote
             clickedNote={clickedNote}
           />
-          <button className="btn">{clickedNote ? "-" : "+"}</button>
-        </div>
+          <span className="btn">{clickedNote ? "-" : "+"}</span>
+        </motion.div>
 
         <footer className="actions">
           <Link to={`/dashboard/edit-job/${_id}`} className="btn edit-btn">
@@ -70,7 +75,7 @@ const Job = ({
             </button>
           </Form>
         </footer>
-      </div>
+      </motion.div>
     </Wrapper>
   );
 };
