@@ -31,7 +31,7 @@ const Job = ({
 
   return (
     <Wrapper className={clickedNote && "expanded"}>
-      <motion.header layout>
+      <motion.header layout="position">
         <motion.div className="main-icon">{company.charAt(0)}</motion.div>
         <motion.div className="info">
           <motion.h5>{position}</motion.h5>

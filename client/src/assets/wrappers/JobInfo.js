@@ -18,6 +18,7 @@ const Wrapper = styled.div`
   }
   .note-text {
     width: 100%;
+    height: 18px;
     overflow: hidden;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
@@ -25,6 +26,7 @@ const Wrapper = styled.div`
   }
   .show {
     display: flex;
+    height: auto;
   }
 `;
 export default Wrapper;
