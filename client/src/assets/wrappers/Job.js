@@ -71,9 +71,10 @@ const Wrapper = styled.article`
     align-items: center;
   }
   .edit-btn,
-  .delete-btn {
+  .delete-btn,
+  .accordian-btn {
     height: 30px;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     display: flex;
     align-items: center;
   }

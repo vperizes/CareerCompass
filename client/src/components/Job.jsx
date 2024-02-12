@@ -3,6 +3,8 @@ import {
   FaBriefcase,
   FaCalendarAlt,
   FaPencilAlt,
+  FaAngleDoubleDown,
+  FaAngleDoubleUp,
 } from "react-icons/fa";
 import { Link, Form } from "react-router-dom";
 import Wrapper from "../assets/wrappers/Job";
@@ -62,7 +64,9 @@ const Job = ({
             isNote
             clickedNote={clickedNote}
           />
-          <span className="btn">{clickedNote ? "-" : "+"}</span>
+          <span className="btn accordian-btn">
+            {clickedNote ? <FaAngleDoubleUp /> : <FaAngleDoubleDown />}
+          </span>
         </motion.div>
 
         <footer className="actions">
