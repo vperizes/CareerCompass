@@ -1,4 +1,22 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+const expand = keyframes`
+from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(180deg);
+  }
+`;
+
+const condense = keyframes`
+from {
+    transform: rotate(180deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+`;
 
 const Wrapper = styled.article`
   border: var(--border-job-card);
@@ -80,6 +98,15 @@ const Wrapper = styled.article`
   }
   .edit-btn {
     margin-right: 0.5rem;
+  }
+
+  .accordian-btn {
+    animation-duration: ${(props) => (props.clickedNote ? 0.5 : 0)}s;
+    animation-name: ${(props) => (props.clickedNote ? expand : condense)};
+  }
+
+  .accordian-btn.expand {
+    transform: rotate(180deg);
   }
 
   .accordian {

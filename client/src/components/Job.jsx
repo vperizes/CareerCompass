@@ -32,7 +32,7 @@ const Job = ({
   const clickedNote = selected === _id;
 
   return (
-    <Wrapper className={clickedNote && "expanded"}>
+    <Wrapper clickedNote={clickedNote} className={clickedNote && "expanded"}>
       <motion.header layout="position">
         <motion.div className="main-icon">{company.charAt(0)}</motion.div>
         <motion.div className="info">
@@ -64,8 +64,12 @@ const Job = ({
             isNote
             clickedNote={clickedNote}
           />
-          <span className="btn accordian-btn">
-            {clickedNote ? <FaAngleDoubleUp /> : <FaAngleDoubleDown />}
+          <span
+            className={
+              clickedNote ? "btn accordian-btn expand" : "btn accordian-btn"
+            }
+          >
+            <FaAngleDoubleDown />
           </span>
         </motion.div>
 
