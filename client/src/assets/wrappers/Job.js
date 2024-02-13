@@ -1,22 +1,4 @@
-import styled, { keyframes } from "styled-components";
-
-const expand = keyframes`
-from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(180deg);
-  }
-`;
-
-const condense = keyframes`
-from {
-    transform: rotate(180deg);
-  }
-  to {
-    transform: rotate(0deg);
-  }
-`;
+import styled from "styled-components";
 
 const Wrapper = styled.article`
   border: var(--border-job-card);
@@ -101,8 +83,7 @@ const Wrapper = styled.article`
   }
 
   .accordian-btn {
-    animation-duration: ${(props) => (props.clickedNote ? 0.5 : 0)}s;
-    animation-name: ${(props) => (props.clickedNote ? expand : condense)};
+    transition: 500ms transform ease-in-out;
   }
 
   .accordian-btn.expand {
