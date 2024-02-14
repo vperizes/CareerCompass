@@ -27,10 +27,10 @@ const JobsContainer = () => {
   }
   return (
     <Wrapper>
-      <motion.h5 layout>
+      <h5>
         {totalJobs} {jobs.length > 1 ? "jobs" : "job"} found
-      </motion.h5>
-      <motion.div layout="position" className="jobs">
+      </h5>
+      <div className="jobs">
         {jobs.map((job) => {
           return (
             <Job
@@ -41,7 +41,7 @@ const JobsContainer = () => {
             />
           );
         })}
-      </motion.div>
+      </div>
       {numOfPages > 1 && <PageBtnContainer />}
     </Wrapper>
   );
