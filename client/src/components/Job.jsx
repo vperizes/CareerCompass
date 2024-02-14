@@ -43,11 +43,11 @@ const Job = ({
   return (
     <Wrapper className={hasNote && "expanded"}>
       <motion.header layout="position">
-        <motion.div className="main-icon">{company.charAt(0)}</motion.div>
-        <motion.div className="info">
-          <motion.h5>{position}</motion.h5>
-          <motion.p>{company}</motion.p>
-        </motion.div>
+        <div className="main-icon">{company.charAt(0)}</div>
+        <div className="info">
+          <h5>{position}</h5>
+          <p>{company}</p>
+        </div>
       </motion.header>
       <motion.div
         layout
@@ -58,12 +58,9 @@ const Job = ({
           <JobInfo icon={<FaLocationArrow />} text={jobLocation} />
           <JobInfo icon={<FaCalendarAlt />} text={date} />
           <JobInfo icon={<FaBriefcase />} text={jobType} />
-          <motion.div className={`status ${jobStatus}`}>{jobStatus}</motion.div>
+          <div className={`status ${jobStatus}`}>{jobStatus}</div>
         </motion.div>
-        <motion.div
-          layout="position"
-          className={applicationNote && "accordian"}
-        >
+        <div className={applicationNote && "accordian"}>
           <JobInfo
             icon={<FaPencilAlt />}
             text={applicationNote}
@@ -83,7 +80,7 @@ const Job = ({
               <FaAngleDoubleDown />
             </button>
           )}
-        </motion.div>
+        </div>
 
         <motion.footer layout="position" className="actions">
           <Link to={`/dashboard/edit-job/${_id}`} className="btn edit-btn">
