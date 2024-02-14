@@ -3,17 +3,17 @@ import { motion } from "framer-motion";
 const JobInfo = ({ icon, text, isNote, clickedNote }) => {
   return (
     <Wrapper>
-      <motion.span className="job-icon">{icon}</motion.span>
+      <span className="job-icon">{icon}</span>
       {isNote ? (
-        <motion.span
+        <span
           className={
             clickedNote ? "job-text note-text show" : "job-text note-text"
           }
         >
           {text}
-        </motion.span>
+        </span>
       ) : (
-        <motion.span className="job-text">{text}</motion.span>
+        <span className="job-text">{text}</span>
       )}
     </Wrapper>
   );

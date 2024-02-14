@@ -85,7 +85,7 @@ const Job = ({
           )}
         </motion.div>
 
-        <footer className="actions">
+        <motion.footer layout="position" className="actions">
           <Link to={`/dashboard/edit-job/${_id}`} className="btn edit-btn">
             Edit
           </Link>
@@ -94,7 +94,7 @@ const Job = ({
               Delete
             </button>
           </Form>
-        </footer>
+        </motion.footer>
       </motion.div>
     </Wrapper>
   );
