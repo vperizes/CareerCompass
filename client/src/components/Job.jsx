@@ -62,7 +62,7 @@ const Job = ({
         </motion.div>
         <motion.div
           layout="position"
-          className={applicationNote !== null && "accordian"}
+          className={applicationNote && "accordian"}
         >
           <JobInfo
             icon={<FaPencilAlt />}
@@ -70,7 +70,7 @@ const Job = ({
             isNote
             clickedNote={isClicked}
           />
-          {applicationNote !== null && (
+          {applicationNote && (
             <button
               onClick={() => {
                 handleNote();
