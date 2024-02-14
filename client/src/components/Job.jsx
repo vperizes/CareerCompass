@@ -4,7 +4,6 @@ import {
   FaCalendarAlt,
   FaPencilAlt,
   FaAngleDoubleDown,
-  FaAngleDoubleUp,
 } from "react-icons/fa";
 import { Link, Form } from "react-router-dom";
 import Wrapper from "../assets/wrappers/Job";
@@ -12,6 +11,7 @@ import JobInfo from "./JobInfo";
 import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 dayjs.extend(advancedFormat);
 
@@ -27,12 +27,21 @@ const Job = ({
   selected,
   handleSelectJob,
 }) => {
+  const [hasNote, setHasNote] = useState(false);
+  const handleNote = () => {
+    if (applicationNote) {
+      setHasNote(!hasNote);
+    }
+  };
+
   let date = applicationDate.toString().split("T")[0];
   date = dayjs(date).format("MMM D, YYYY");
-  const clickedNote = selected === _id;
+  const isClicked = selected === _id;
+
+  //useState, isExpanded. create condition for setting isExpanded to true
 
   return (
-    <Wrapper className={clickedNote && "expanded"}>
+    <Wrapper className={hasNote && "expanded"}>
       <motion.header layout="position">
         <motion.div className="main-icon">{company.charAt(0)}</motion.div>
         <motion.div className="info">
@@ -53,24 +62,27 @@ const Job = ({
         </motion.div>
         <motion.div
           layout="position"
-          className="accordian"
-          onClick={() => {
-            handleSelectJob(_id);
-          }}
+          className={applicationNote !== null && "accordian"}
         >
           <JobInfo
             icon={<FaPencilAlt />}
             text={applicationNote}
             isNote
-            clickedNote={clickedNote}
+            clickedNote={isClicked}
           />
-          <span
-            className={
-              clickedNote ? "btn accordian-btn expand" : "btn accordian-btn"
-            }
-          >
-            <FaAngleDoubleDown />
-          </span>
+          {applicationNote !== null && (
+            <button
+              onClick={() => {
+                handleNote();
+                handleSelectJob(_id);
+              }}
+              className={
+                isClicked ? "btn accordian-btn expand" : "btn accordian-btn"
+              }
+            >
+              <FaAngleDoubleDown />
+            </button>
+          )}
         </motion.div>
 
         <footer className="actions">

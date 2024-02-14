@@ -95,7 +95,6 @@ const Wrapper = styled.article`
     justify-content: space-between;
     align-items: center;
     gap: 20px;
-    cursor: pointer;
   }
 `;
 
