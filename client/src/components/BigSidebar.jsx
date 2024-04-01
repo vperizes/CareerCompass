@@ -6,10 +6,8 @@ const BigSidebar = () => {
   const { showSidebar } = useDashboardContext();
   return (
     <Wrapper>
-      <div className="sidebar-container show-sidebar">
-        <div className="content">
-          <NavLinks isBigSidebar />
-        </div>
+      <div className="menu-container">
+        <NavLinks isBigSidebar />
       </div>
     </Wrapper>
   );

@@ -3,42 +3,31 @@ import styled from "styled-components";
 const Wrapper = styled.aside`
   display: none;
   @media (min-width: 992px) {
-    display: block;
+    display: flex;
     box-shadow: 1px 0px 0px 0px rgba(0, 0, 0, 0.1);
-    .sidebar-container {
+    .menu-container {
       background: var(--background-sidebar);
-      height: 150px;
-      width: 100%;
-      margin-left: -250px;
-    }
-    .content {
-      position: sticky;
-      top: 0;
-    }
-    .show-sidebar {
-      margin-left: 0;
-    }
-    header {
-      height: 6rem;
-      display: flex;
+      height: 60px;
+      width: 100vw;
       align-items: center;
-      padding-left: 2.5rem;
     }
     .nav-links {
       display: flex;
       flex-direction: row;
+      justify-content: center;
+      gap: 50px;
     }
     .nav-link {
       display: flex;
       align-items: center;
       color: var(--text-secondary-color);
-      padding: 1rem 0;
-      padding-left: 2.5rem;
+      padding: 1rem;
+      font-size: 1rem;
       text-transform: capitalize;
-      transition: padding-left 0.3s ease-in-out;
+      transition: font-size 0.3s ease-in-out;
     }
     .nav-link:hover {
-      padding-left: 3rem;
+      font-size: 1.2rem;
       color: var(--primary-700);
       transition: var(--transition);
     }
@@ -50,6 +39,7 @@ const Wrapper = styled.aside`
     }
     .active {
       color: var(--primary-700);
+      font-size: 1.2rem;
     }
     .pending {
       background: var(--background-color);
