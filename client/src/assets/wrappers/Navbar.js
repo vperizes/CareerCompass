@@ -26,6 +26,7 @@ const Wrapper = styled.nav`
   .toggle-btn:hover {
     color: var(--primary-800);
   }
+
   .logo-text {
     display: none;
   }
@@ -38,17 +39,20 @@ const Wrapper = styled.nav`
     display: flex;
     align-items: center;
   }
-  @media (min-width: 992px) {
-    position: sticky;
+
+  ${"" /* for big screen */}
+  @media (min-width: 990px) {
     top: 0;
+    .toggle-btn {
+      display: none;
+    }
+
     .nav-center {
       width: 90%;
     }
-    .logo {
-      display: none;
-    }
+
     .logo-text {
-      display: block;
+      display: flex;
     }
   }
 `;

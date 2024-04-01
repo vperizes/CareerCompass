@@ -7,11 +7,9 @@ const Wrapper = styled.aside`
     box-shadow: 1px 0px 0px 0px rgba(0, 0, 0, 0.1);
     .sidebar-container {
       background: var(--background-sidebar);
-      min-height: 100vh;
-      height: 100%;
-      width: 250px;
+      height: 150px;
+      width: 100%;
       margin-left: -250px;
-      transition: margin-left 0.3s ease-in-out;
     }
     .content {
       position: sticky;
@@ -27,9 +25,8 @@ const Wrapper = styled.aside`
       padding-left: 2.5rem;
     }
     .nav-links {
-      padding-top: 2rem;
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
     }
     .nav-link {
       display: flex;

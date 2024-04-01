@@ -6,6 +6,8 @@ const Wrapper = styled.section`
     grid-template-columns: 1fr;
   }
   .dashboard-page {
+    display: grid;
+    grid-template-columns: 1fr;
     width: 90vw;
     margin: 1rem auto;
     padding: 2rem 0;

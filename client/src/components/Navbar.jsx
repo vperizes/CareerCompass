@@ -13,10 +13,8 @@ const Navbar = () => {
         <button type="button" className="toggle-btn" onClick={toggleSidebar}>
           <FaAlignLeft />
         </button>
-        <div>
-          <Logo />
-          <h4 className="logo-text">Dashboard</h4>
-        </div>
+        <Logo />
+        <h4 className="logo-text">Dashboard</h4>
         <div className="btn-container">
           <LogoutContainer />
           <ThemeToggle />

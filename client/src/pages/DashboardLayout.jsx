@@ -64,11 +64,11 @@ const DashboardLayout = ({ queryClient }) => {
       }}
     >
       <Wrapper>
-        <main className="dashboard">
+        <main>
+          <Navbar />
           <SmallSidebar />
           <BigSidebar />
-          <div>
-            <Navbar />
+          <div className="dashboard">
             <div className="dashboard-page">
               {isPageLoading ? <Loading /> : <Outlet context={{ user }} />}
             </div>
