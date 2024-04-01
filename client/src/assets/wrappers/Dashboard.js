@@ -1,10 +1,6 @@
 import styled from "styled-components";
 
 const Wrapper = styled.section`
-  .dashboard {
-    display: grid;
-    grid-template-columns: 1fr;
-  }
   .dashboard-page {
     display: grid;
     grid-template-columns: 1fr;
@@ -13,9 +9,6 @@ const Wrapper = styled.section`
     padding: 2rem 0;
   }
   @media (min-width: 992px) {
-    .dashboard {
-      grid-template-columns: auto 1fr;
-    }
     .dashboard-page {
       width: 90%;
     }
