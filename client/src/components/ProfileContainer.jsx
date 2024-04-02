@@ -6,6 +6,7 @@ import { NavLink } from "react-router-dom";
 import { ImProfile } from "react-icons/im";
 import { MdAdminPanelSettings } from "react-icons/md";
 import { RiLogoutBoxRLine } from "react-icons/ri";
+import ThemeToggle from "./ThemeToggle";
 
 const ProfileContainer = () => {
   const [showProfile, setShowProfile] = useState(false);
@@ -42,6 +43,7 @@ const ProfileContainer = () => {
             Admin
           </NavLink>
         )}
+        <ThemeToggle />
         <NavLink key="logout" onClick={logoutUser} className="dropdown-link">
           <span className="icon">
             <RiLogoutBoxRLine />

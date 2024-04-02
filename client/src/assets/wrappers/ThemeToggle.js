@@ -2,15 +2,18 @@ import styled from "styled-components";
 
 const Wrapper = styled.button`
   background: transparent;
-  border-color: transparent;
-  width: 3.5rem;
-  height: 2rem;
-  display: grid;
-  place-items: center;
-  cursor: pointer;
+  .icon,
   .toggle-icon {
-    font-size: 1.15rem;
-    color: var(--text-color);
+    font-size: 1.5rem;
+    display: grid;
+    place-items: center;
+    color: var(--text-secondary-color);
+  }
+  .icon {
+    margin-right: 1rem;
+  }
+  .toggle-icon {
+    margin-left: 1rem;
   }
 `;
 export default Wrapper;

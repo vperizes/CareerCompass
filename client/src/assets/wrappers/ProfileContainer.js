@@ -18,13 +18,13 @@ const Wrapper = styled.div`
     flex-direction: column;
     position: absolute;
     top: 45px;
-    left: 0;
-    height: 100%;
     text-align: center;
     visibility: hidden;
     gap: 20px;
-    width: 200px;
+    min-width: 200px;
     background: var(--background-sidebar);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-1);
   }
   .show-dropdown {
     visibility: visible;
@@ -32,15 +32,14 @@ const Wrapper = styled.div`
   .dropdown-link {
     display: flex;
     padding: 0.5rem;
-    color: var(--white);
+    align-items: center;
+    color: var(--text-secondary-color);
     letter-spacing: var(--letter-spacing);
     text-transform: capitalize;
-    cursor: pointer;
     width: 100%;
-    height: 100%;
   }
   .dropdown-link:hover {
-    background-color: var(--primary-800);
+    background-color: var(--primary-200);
   }
   .icon {
     font-size: 1.5rem;
