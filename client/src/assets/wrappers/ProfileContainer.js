@@ -18,6 +18,7 @@ const Wrapper = styled.div`
     flex-direction: column;
     position: absolute;
     top: 45px;
+    right: -10px;
     text-align: center;
     visibility: hidden;
     gap: 20px;
@@ -41,11 +42,20 @@ const Wrapper = styled.div`
   .dropdown-link:hover {
     background-color: var(--primary-200);
   }
+
+  .icon,
+  .toggle-icon {
+    display: grid;
+    place-items: center;
+  }
+
   .icon {
     font-size: 1.5rem;
     margin-right: 1rem;
-    display: grid;
-    place-items: center;
+  }
+  .toggle-icon {
+    font-size: 2rem;
+    margin-left: 1.5rem;
   }
 `;
 

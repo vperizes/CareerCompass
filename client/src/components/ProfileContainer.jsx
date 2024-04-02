@@ -6,11 +6,14 @@ import { NavLink } from "react-router-dom";
 import { ImProfile } from "react-icons/im";
 import { MdAdminPanelSettings } from "react-icons/md";
 import { RiLogoutBoxRLine } from "react-icons/ri";
-import ThemeToggle from "./ThemeToggle";
+import { BsFillMoonFill } from "react-icons/bs";
+import { BsToggleOff } from "react-icons/bs";
+import { BsToggleOn } from "react-icons/bs";
 
 const ProfileContainer = () => {
   const [showProfile, setShowProfile] = useState(false);
-  const { user, logoutUser } = useDashboardContext();
+  const { user, logoutUser, isDarkTheme, toggleDarkTheme } =
+    useDashboardContext();
   const { role } = user;
 
   return (
@@ -43,7 +46,16 @@ const ProfileContainer = () => {
             Admin
           </NavLink>
         )}
-        <ThemeToggle />
+
+        <NavLink onClick={toggleDarkTheme} className="dropdown-link">
+          <span className="icon">
+            <BsFillMoonFill />
+          </span>
+          Dark Mode
+          <span className="toggle-icon">
+            {isDarkTheme ? <BsToggleOn /> : <BsToggleOff />}
+          </span>
+        </NavLink>
         <NavLink key="logout" onClick={logoutUser} className="dropdown-link">
           <span className="icon">
             <RiLogoutBoxRLine />
