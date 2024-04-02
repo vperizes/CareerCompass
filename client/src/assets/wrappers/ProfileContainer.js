@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const Wrapper = styled.div`
   position: relative;
-  .logout-btn {
+  .profile-btn {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -14,24 +14,24 @@ const Wrapper = styled.div`
     border-radius: 50%;
   }
   .dropdown {
+    display: flex;
+    flex-direction: column;
     position: absolute;
     top: 45px;
     left: 0;
-    width: 100%;
-    box-shadow: var(--shadow-2);
+    height: 100%;
     text-align: center;
     visibility: hidden;
-    border-radius: var(--border-radius);
-    background: var(--primary-700);
+    gap: 20px;
+    width: 200px;
+    background: var(--background-sidebar);
   }
   .show-dropdown {
     visibility: visible;
   }
-  .dropdown-btn {
-    border-radius: var(--border-radius);
+  .dropdown-link {
+    display: flex;
     padding: 0.5rem;
-    background: transparent;
-    border-color: transparent;
     color: var(--white);
     letter-spacing: var(--letter-spacing);
     text-transform: capitalize;
@@ -39,8 +39,14 @@ const Wrapper = styled.div`
     width: 100%;
     height: 100%;
   }
-  .dropdown-btn:hover {
+  .dropdown-link:hover {
     background-color: var(--primary-800);
+  }
+  .icon {
+    font-size: 1.5rem;
+    margin-right: 1rem;
+    display: grid;
+    place-items: center;
   }
 `;
 
