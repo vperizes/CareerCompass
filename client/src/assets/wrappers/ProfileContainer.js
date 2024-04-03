@@ -21,7 +21,7 @@ const Wrapper = styled.div`
     right: -10px;
     text-align: center;
     visibility: hidden;
-    gap: 20px;
+    gap: 15px;
     min-width: 200px;
     background: var(--background-sidebar);
     border-radius: var(--border-radius);
@@ -38,9 +38,10 @@ const Wrapper = styled.div`
     letter-spacing: var(--letter-spacing);
     text-transform: capitalize;
     width: 100%;
+    border-radius: var(--border-radius);
   }
   .dropdown-link:hover {
-    background-color: var(--primary-200);
+    background-color: var(--profilecontainer-hover);
   }
 
   .icon,
@@ -56,6 +57,7 @@ const Wrapper = styled.div`
   .toggle-icon {
     font-size: 2rem;
     margin-left: 1.5rem;
+    color: var(--primary-300);
   }
 `;
 

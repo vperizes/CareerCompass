@@ -69,6 +69,7 @@ html {
   --dark-mode-text-color: #f7f1ea;
   --dark-mode-bg-secondary-color: #1e1e1e;
   --dark-mode-bg-sidebar: #1e1e1e;
+  --dark-mode-hover-profilecontainer: var(--primary-700);
   --dark-mode-text-secondary-color: var(--grey-300);
   --dark-mode-border-job-card: 0.1rem solid var(--grey-900);
 
@@ -78,6 +79,7 @@ html {
   --background-sidebar: var(--primary-50);
   --text-secondary-color: var(--grey-600);
   --border-job-card: 0.1rem solid var(--grey-100);
+  --profilecontainer-hover: var(--grey-200);
 }
 
 .dark-theme {
@@ -87,6 +89,7 @@ html {
   --background-secondary-color: var(--dark-mode-bg-secondary-color);
   --background-sidebar: var(--dark-mode-bg-sidebar);
   --border-job-card: var(--dark-mode-border-job-card);
+  --profilecontainer-hover: var(--dark-mode-hover-profilecontainer);
 }
 
 body {
