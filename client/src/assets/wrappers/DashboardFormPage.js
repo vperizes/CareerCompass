@@ -41,9 +41,7 @@ const Wrapper = styled.section`
     text-align: center;
     margin-bottom: 10px;
   }
-  p {
-    margin-top: 10px;
-  }
+
   .avatar-img {
     position: relative;
     width: 150px;
@@ -59,10 +57,15 @@ const Wrapper = styled.section`
     border-radius: 50%;
     border: solid 2px var(--primary-400);
     cursor: pointer;
-    left: 40px;
-    bottom: 40px;
+    right: 55px;
+    top: 5px;
     z-index: 1;
     background: var(--primary-200);
+    padding: 5px;
+  }
+
+  p {
+    margin-top: 10px;
   }
 
   @media (min-width: 992px) {

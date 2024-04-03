@@ -37,13 +37,12 @@ const Profile = () => {
       <Form method="post" className="form" encType="multipart/form-data">
         <h4 className="form-title">profile</h4>
         <div className="imgupdate-center">
-          {user.avatar ? (
-            <img src={user.avatar} alt="avatar" className="avatar-img" />
-          ) : (
-            <GiPlagueDoctorProfile className="avatar-img" />
-          )}
-
           <div>
+            {user.avatar ? (
+              <img src={user.avatar} alt="avatar" className="avatar-img" />
+            ) : (
+              <GiPlagueDoctorProfile className="avatar-img" />
+            )}
             <input
               type="file"
               id="avatar"
