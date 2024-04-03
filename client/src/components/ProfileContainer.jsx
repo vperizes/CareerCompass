@@ -32,14 +32,24 @@ const ProfileContainer = () => {
         <FaCaretDown />
       </button>
       <div className={showProfile ? "dropdown show-dropdown" : "dropdown"}>
-        <NavLink to="profile" key="profile" className="dropdown-link">
+        <NavLink
+          to="profile"
+          key="profile"
+          className="dropdown-link"
+          onClick={() => setShowProfile(!showProfile)}
+        >
           <span className="icon">
             <ImProfile />
           </span>
           Profile
         </NavLink>
         {role === "admin" && (
-          <NavLink to="admin" key="admin" className="dropdown-link">
+          <NavLink
+            to="admin"
+            key="admin"
+            className="dropdown-link"
+            onClick={() => setShowProfile(!showProfile)}
+          >
             <span className="icon">
               <MdAdminPanelSettings />
             </span>
@@ -47,7 +57,7 @@ const ProfileContainer = () => {
           </NavLink>
         )}
 
-        <NavLink onClick={toggleDarkTheme} className="dropdown-link">
+        <div onClick={toggleDarkTheme} className="dropdown-link">
           <span className="icon">
             <BsFillMoonFill />
           </span>
@@ -55,7 +65,7 @@ const ProfileContainer = () => {
           <span className="toggle-icon">
             {isDarkTheme ? <BsToggleOn /> : <BsToggleOff />}
           </span>
-        </NavLink>
+        </div>
         <NavLink key="logout" onClick={logoutUser} className="dropdown-link">
           <span className="icon">
             <RiLogoutBoxRLine />
