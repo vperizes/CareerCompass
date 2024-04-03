@@ -3,6 +3,8 @@ import Wrapper from "../assets/wrappers/DashboardFormPage";
 import { FormInput, SubmitBtn } from "../components";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { GiPlagueDoctorProfile } from "react-icons/gi";
+import { TbCameraPlus } from "react-icons/tb";
 
 export const updateUserAction =
   (queryClient) =>
@@ -28,25 +30,32 @@ export const updateUserAction =
 
 const Profile = () => {
   const { user } = useOutletContext();
-  const { name, lastName, email, location } = user;
+  const { name, lastName, email, location, avatar } = user;
 
   return (
     <Wrapper>
       <Form method="post" className="form" encType="multipart/form-data">
         <h4 className="form-title">profile</h4>
+        <div className="imgupdate-center">
+          {user.avatar ? (
+            <img src={user.avatar} alt="avatar" className="avatar-img" />
+          ) : (
+            <GiPlagueDoctorProfile className="avatar-img" />
+          )}
+          <input
+            type="file"
+            id="avatar"
+            name="avatar"
+            className="img-update"
+            accept="image/*"
+            hidden
+          />
+          <label htmlFor="avatar" className="label-pos">
+            <TbCameraPlus className="img-update" />
+          </label>
+          <p className="form-label">Select image file (max 0.5 MB)</p>
+        </div>
         <div className="form-center">
-          <div className="form-row">
-            <label htmlFor="avatar" className="form-label">
-              Select image file (max 0.5 MB)
-            </label>
-            <input
-              type="file"
-              id="avatar"
-              name="avatar"
-              className="form-input"
-              accept="image/*"
-            />
-          </div>
           <FormInput type="text" name="name" defaultValue={name} />
           <FormInput
             type="text"

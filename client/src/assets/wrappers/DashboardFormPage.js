@@ -32,6 +32,34 @@ const Wrapper = styled.section`
     display: grid;
     place-items: center;
   }
+
+  ${"" /* profile image update styling */}
+  .imgupdate-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  p {
+    margin-top: 10px;
+  }
+  .avatar-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: solid 2px var(--primary-400);
+  }
+  .label-pos {
+    top: -10px;
+    left: 10px;
+  }
+  .img-update {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: solid 2px var(--primary-400);
+  }
   @media (min-width: 992px) {
     .form-center {
       grid-template-columns: 1fr 1fr;
