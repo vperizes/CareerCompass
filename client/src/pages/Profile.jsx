@@ -42,17 +42,20 @@ const Profile = () => {
           ) : (
             <GiPlagueDoctorProfile className="avatar-img" />
           )}
-          <input
-            type="file"
-            id="avatar"
-            name="avatar"
-            className="img-update"
-            accept="image/*"
-            hidden
-          />
-          <label htmlFor="avatar" className="label-pos">
-            <TbCameraPlus className="img-update" />
-          </label>
+
+          <div>
+            <input
+              type="file"
+              id="avatar"
+              name="avatar"
+              accept="image/*"
+              hidden
+            />
+            <label htmlFor="avatar">
+              <TbCameraPlus className="img-update" />
+            </label>
+          </div>
+
           <p className="form-label">Select image file (max 0.5 MB)</p>
         </div>
         <div className="form-center">

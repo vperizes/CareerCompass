@@ -45,21 +45,26 @@ const Wrapper = styled.section`
     margin-top: 10px;
   }
   .avatar-img {
-    width: 100px;
-    height: 100px;
+    position: relative;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     border: solid 2px var(--primary-400);
   }
-  .label-pos {
-    top: -10px;
-    left: 10px;
-  }
+
   .img-update {
-    width: 30px;
-    height: 30px;
+    position: relative;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     border: solid 2px var(--primary-400);
+    cursor: pointer;
+    left: 40px;
+    bottom: 40px;
+    z-index: 1;
+    background: var(--primary-200);
   }
+
   @media (min-width: 992px) {
     .form-center {
       grid-template-columns: 1fr 1fr;
