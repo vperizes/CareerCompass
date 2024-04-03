@@ -3,12 +3,11 @@ import { useDashboardContext } from "../pages/DashboardLayout";
 import Wrapper from "../assets/wrappers/ProfileContainer";
 import { FaCaretDown, FaUserCircle } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
-import { ImProfile } from "react-icons/im";
-import { MdAdminPanelSettings } from "react-icons/md";
 import { RiLogoutBoxRLine } from "react-icons/ri";
 import { BsFillMoonFill } from "react-icons/bs";
 import { BsToggleOff } from "react-icons/bs";
 import { BsToggleOn } from "react-icons/bs";
+import profileLinks from "../utils/profileLinks";
 
 const ProfileContainer = () => {
   const [showProfile, setShowProfile] = useState(false);
@@ -32,30 +31,22 @@ const ProfileContainer = () => {
         <FaCaretDown />
       </button>
       <div className={showProfile ? "dropdown show-dropdown" : "dropdown"}>
-        <NavLink
-          to="profile"
-          key="profile"
-          className="dropdown-link"
-          onClick={() => setShowProfile(!showProfile)}
-        >
-          <span className="icon">
-            <ImProfile />
-          </span>
-          Profile
-        </NavLink>
-        {role === "admin" && (
-          <NavLink
-            to="admin"
-            key="admin"
-            className="dropdown-link"
-            onClick={() => setShowProfile(!showProfile)}
-          >
-            <span className="icon">
-              <MdAdminPanelSettings />
-            </span>
-            Admin
-          </NavLink>
-        )}
+        {profileLinks.map((profilelink) => {
+          const { text, path, icon } = profilelink;
+          if (path === "admin" && role !== "admin") return;
+          return (
+            <NavLink
+              to={path}
+              key={text}
+              className="dropdown-link"
+              onClick={() => setShowProfile(!showProfile)}
+              end
+            >
+              <span className="icon">{icon}</span>
+              {text}
+            </NavLink>
+          );
+        })}
 
         <div onClick={toggleDarkTheme} className="dropdown-link">
           <span className="icon">
