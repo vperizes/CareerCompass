@@ -1,4 +1,4 @@
-import logo from "../assets/images/CClogo.svg";
+import logo from "../assets/images/CClogo_long.svg";
 
 const Logo = () => {
   return <img src={logo} alt="career compass logo" className="logo" />;
