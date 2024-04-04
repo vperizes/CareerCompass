@@ -4,32 +4,39 @@ const Wrapper = styled.aside`
   display: none;
   @media (min-width: 992px) {
     display: flex;
-    box-shadow: 1px 0px 0px 0px rgba(0, 0, 0, 0.1);
+    align-items: center;
+    justify-content: center;
+    margin-top: 1.5rem;
     .menu-container {
-      background: var(--background-sidebar);
       height: 60px;
-      width: 100vw;
+      width: 90vw;
       align-items: center;
     }
     .nav-links {
       display: flex;
       flex-direction: row;
       justify-content: center;
-      gap: 50px;
+      gap: 100px;
     }
     .nav-link {
       display: flex;
       align-items: center;
       color: var(--text-secondary-color);
       padding: 1rem;
-      font-size: 1rem;
+      font-size: 1.25rem;
       text-transform: capitalize;
       transition: font-size 0.3s ease-in-out;
+      border-bottom: 2px solid var(--grey-600);
+      border-radius: var(--border-radius);
+      letter-spacing: 1px;
     }
     .nav-link:hover {
-      font-size: 1.2rem;
       color: var(--primary-700);
+      box-shadow: 0 0.5em 0.5em -0.4em var(--primary-200);
+      transform: translateY(-0.25em);
+      font-size: 1.5rem;
       transition: var(--transition);
+      letter-spacing: 5px;
     }
     .icon {
       font-size: 1.5rem;
@@ -39,7 +46,8 @@ const Wrapper = styled.aside`
     }
     .active {
       color: var(--primary-700);
-      font-size: 1.2rem;
+      box-shadow: 0 0.6em 0.6em -0.4em var(--primary-600);
+      font-size: 1.5rem;
     }
     .pending {
       background: var(--background-color);
