@@ -9,14 +9,13 @@ const Wrapper = styled.aside`
     margin-top: 1.5rem;
     .menu-container {
       height: 60px;
-      width: 90vw;
+      width: 100%;
       align-items: center;
     }
     .nav-links {
       display: flex;
       flex-direction: row;
-      justify-content: center;
-      gap: 100px;
+      justify-content: space-evenly;
     }
     .nav-link {
       display: flex;
