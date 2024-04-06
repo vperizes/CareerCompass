@@ -95,6 +95,12 @@ export const deleteJob = async (req, res) => {
 //stats
 // need to set up month increments as query params to display
 export const showStats = async (req, res) => {
+  const { sortStats } = req.query;
+  const queryObj = {
+    createdBy: req.user.userId,
+    sortStats,
+  };
+
   let stats = await jobModel.aggregate([
     { $match: { createdBy: new mongoose.Types.ObjectId(req.user.userId) } }, //matching stage - get jobs assoc with user
     { $group: { _id: "$jobStatus", count: { $sum: 1 } } }, //grouping stage - group jobs by job type
@@ -114,7 +120,8 @@ export const showStats = async (req, res) => {
     offer: stats.offer || 0,
   };
 
-  let monthlyApplications = await jobModel.aggregate([
+  //put monthly stats pipeline in array so we can conditionally push $limit stage
+  let monthlyStats_pipeline = [
     { $match: { createdBy: new mongoose.Types.ObjectId(req.user.userId) } },
     {
       $group: {
@@ -126,8 +133,14 @@ export const showStats = async (req, res) => {
       },
     },
     { $sort: { "_id.year": -1, "_id.month": -1 } }, //get the latest month first - sets us up to view latest data
-    // { $limit: 6 }, //set limit to month query
-  ]);
+  ];
+
+  // Add $limit stage conditionally
+  if (sortStats !== "all") {
+    monthlyStats_pipeline.push({ $limit: parseInt(sortStats) });
+  }
+
+  let monthlyApplications = await jobModel.aggregate(monthlyStats_pipeline);
 
   monthlyApplications = monthlyApplications
     .map((item) => {
