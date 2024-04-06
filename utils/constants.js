@@ -19,8 +19,7 @@ export const JOB_SORT_BY = {
   descending: "z-a",
 };
 
-export const SORT_STATS = {
-  all: "all",
+export const STATS_SORT_BY = {
   twelve_mo: "12 months",
   nine_mo: "9 months",
   six_mo: "6 months",
