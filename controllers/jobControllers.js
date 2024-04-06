@@ -93,6 +93,7 @@ export const deleteJob = async (req, res) => {
 };
 
 //stats
+// need to set up month increments as query params to display
 export const showStats = async (req, res) => {
   let stats = await jobModel.aggregate([
     { $match: { createdBy: new mongoose.Types.ObjectId(req.user.userId) } }, //matching stage - get jobs assoc with user
@@ -106,7 +107,6 @@ export const showStats = async (req, res) => {
     return acc;
   }, {});
 
-  //placeholder data
   const defaultStats = {
     pending: stats.pending || 0,
     interview: stats.interview || 0,
@@ -126,7 +126,7 @@ export const showStats = async (req, res) => {
       },
     },
     { $sort: { "_id.year": -1, "_id.month": -1 } }, //get the latest month first - sets us up to view latest data
-    { $limit: 6 }, //only show last 6 months
+    // { $limit: 6 }, //set limit to month query
   ]);
 
   monthlyApplications = monthlyApplications
@@ -135,13 +135,15 @@ export const showStats = async (req, res) => {
         _id: { year, month },
         count,
       } = item;
+
+      // using dayjs to format year and month for each item
       const date = day()
-        .month(month - 1)
+        .month(month - 1) //dayjs counts months starting at zero so need to -1
         .year(year)
         .format("MMM YY");
       return { date, count };
     })
-    .reverse(); //reversing to we show months in chronologicl order
+    .reverse(); //reversing so we show months in chronologicl order
 
   res.status(StatusCodes.OK).json({ defaultStats, monthlyApplications });
 };
