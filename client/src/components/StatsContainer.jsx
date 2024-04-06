@@ -6,6 +6,7 @@ import {
 } from "react-icons/fa";
 import Wrapper from "../assets/wrappers/StatsContainer";
 import StatItem from "./StatItem";
+import { SORT_STATS } from "../../../utils/constants";
 
 const StatsContainer = ({ defaultStats }) => {
   const stats = [
@@ -38,8 +39,18 @@ const StatsContainer = ({ defaultStats }) => {
       bcgColor: "#d4f5d9",
     },
   ];
+
+  const increment = [...Object.values(SORT_STATS)];
+
   return (
     <Wrapper>
+      {increment.map((item) => {
+        return (
+          <button key={item} className="btn">
+            {item}
+          </button>
+        );
+      })}
       {stats.map((item) => {
         return <StatItem key={item.title} {...item} />;
       })}
