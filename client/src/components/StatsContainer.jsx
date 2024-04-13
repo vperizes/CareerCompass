@@ -6,7 +6,8 @@ import {
 } from "react-icons/fa";
 import Wrapper from "../assets/wrappers/StatsContainer";
 import StatItem from "./StatItem";
-import { SORT_STATS } from "../../../utils/constants";
+import { STATS_SORT_BY } from "../../../utils/constants";
+import { Form, useSubmit } from "react-router-dom";
 
 const StatsContainer = ({ defaultStats }) => {
   const stats = [
@@ -40,17 +41,35 @@ const StatsContainer = ({ defaultStats }) => {
     },
   ];
 
-  const increment = [...Object.values(SORT_STATS)];
+  const increment = [...Object.values(STATS_SORT_BY)];
+  const submit = useSubmit();
 
   return (
     <Wrapper>
-      {increment.map((item) => {
-        return (
-          <button key={item} className="btn">
-            {item}
-          </button>
-        );
-      })}
+      <Form>
+        <input
+          className="btn"
+          type="button"
+          value="all"
+          name="sortStats"
+          onClick={(event) => {
+            submit(event.currentTarget.form);
+          }}
+        />
+        {increment.map((item) => {
+          return (
+            <button
+              key={item}
+              name="sortStats"
+              className="btn"
+              type="submit"
+              value={item}
+            >
+              {item == "1" ? "last month" : item + " months"}
+            </button>
+          );
+        })}
+      </Form>
       {stats.map((item) => {
         return <StatItem key={item.title} {...item} />;
       })}

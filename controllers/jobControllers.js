@@ -136,7 +136,7 @@ export const showStats = async (req, res) => {
   ];
 
   // Add $limit stage conditionally
-  if (sortStats !== "all") {
+  if (sortStats && sortStats !== "all") {
     monthlyStats_pipeline.push({ $limit: parseInt(sortStats) });
   }
 

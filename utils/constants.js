@@ -20,9 +20,9 @@ export const JOB_SORT_BY = {
 };
 
 export const STATS_SORT_BY = {
-  twelve_mo: "12 months",
-  nine_mo: "9 months",
-  six_mo: "6 months",
-  three_mo: "3 months",
-  latest_mo: "current month",
+  twelve_mo: "12",
+  nine_mo: "9",
+  six_mo: "6",
+  three_mo: "3",
+  latest_mo: "1",
 };
