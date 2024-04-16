@@ -164,11 +164,24 @@ export const showStats = async (req, res) => {
       },
     },
     {
-      $limit: 3,
+      $limit: parseInt(sortStats),
+    },
+    {
+      $project: {
+        statusCounts: 1,
+      },
     },
   ]);
 
-  console.log(status);
+  //reduce status array to object with job status counts given $limit
+  const totalCounts = status.reduce((acc, item) => {
+    item.statusCounts.forEach(({ status, count }) => {
+      acc[status] = (acc[status] || 0) + count;
+    });
+    return acc;
+  }, {});
+
+  console.log(totalCounts);
 
   //reduce stats array to object
   jobStatusStats = jobStatusStats.reduce((acc, curr) => {
@@ -183,7 +196,6 @@ export const showStats = async (req, res) => {
     declined: jobStatusStats.declined || 0,
     offer: jobStatusStats.offer || 0,
   };
-  // console.log(stats);
 
   //put monthly stats pipeline in array so we can conditionally push $limit stage
   let monthlyStats_pipeline = [
