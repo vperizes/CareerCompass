@@ -101,24 +101,89 @@ export const showStats = async (req, res) => {
     sortStats,
   };
 
-  let stats = await jobModel.aggregate([
+  let jobStatus_pipeline = [
     { $match: { createdBy: new mongoose.Types.ObjectId(req.user.userId) } }, //matching stage - get jobs assoc with user
-    { $group: { _id: "$jobStatus", count: { $sum: 1 } } }, //grouping stage - group jobs by job type
+    {
+      $group: { _id: "$jobStatus", count: { $sum: 1 } },
+    },
+  ];
+
+  let jobStatusStats = await jobModel.aggregate(jobStatus_pipeline);
+
+  const status = await jobModel.aggregate([
+    { $match: { createdBy: new mongoose.Types.ObjectId(req.user.userId) } },
+    {
+      $project: {
+        year: {
+          $year: "$applicationDate",
+        },
+        month: {
+          $month: "$applicationDate",
+        },
+        jobStatus: 1,
+      },
+    },
+    {
+      $group: {
+        _id: {
+          year: "$year",
+          month: "$month",
+          jobStatus: "$jobStatus",
+        },
+        count: {
+          $sum: 1,
+        },
+      },
+    },
+    {
+      $group: {
+        _id: {
+          year: "$_id.year",
+          month: "$_id.month",
+        },
+        statusCounts: {
+          $push: {
+            status: "$_id.jobStatus",
+            count: "$count",
+          },
+        },
+      },
+    },
+    {
+      $project: {
+        _id: 0,
+        year: "$_id.year",
+        month: "$_id.month",
+        statusCounts: 1,
+      },
+    },
+    {
+      $sort: {
+        year: -1,
+        month: -1,
+      },
+    },
+    {
+      $limit: 3,
+    },
   ]);
 
+  console.log(status);
+
   //reduce stats array to object
-  stats = stats.reduce((acc, curr) => {
+  jobStatusStats = jobStatusStats.reduce((acc, curr) => {
     const { _id: title, count } = curr;
     acc[title] = count;
     return acc;
   }, {});
 
   const defaultStats = {
-    pending: stats.pending || 0,
-    interview: stats.interview || 0,
-    declined: stats.declined || 0,
-    offer: stats.offer || 0,
+    pending: jobStatusStats.pending || 0,
+    interview: jobStatusStats.interview || 0,
+    declined: jobStatusStats.declined || 0,
+    offer: jobStatusStats.offer || 0,
   };
+  // console.log(stats);
 
   //put monthly stats pipeline in array so we can conditionally push $limit stage
   let monthlyStats_pipeline = [
