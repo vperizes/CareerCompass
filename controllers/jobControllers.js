@@ -101,16 +101,15 @@ export const showStats = async (req, res) => {
     sortStats,
   };
 
-  let jobStatus_pipeline = [
-    { $match: { createdBy: new mongoose.Types.ObjectId(req.user.userId) } }, //matching stage - get jobs assoc with user
-    {
-      $group: { _id: "$jobStatus", count: { $sum: 1 } },
-    },
-  ];
+  // //default pipeline - stats defaults to "all"
+  // let jobStatusStats = await jobModel.aggregate([
+  //   { $match: { createdBy: new mongoose.Types.ObjectId(req.user.userId) } }, //matching stage - get jobs assoc with user
+  //   {
+  //     $group: { _id: "$jobStatus", count: { $sum: 1 } },
+  //   },
+  // ]);
 
-  let jobStatusStats = await jobModel.aggregate(jobStatus_pipeline);
-
-  const status = await jobModel.aggregate([
+  const status_pipeline = [
     { $match: { createdBy: new mongoose.Types.ObjectId(req.user.userId) } },
     {
       $project: {
@@ -164,14 +163,17 @@ export const showStats = async (req, res) => {
       },
     },
     {
-      $limit: parseInt(sortStats),
-    },
-    {
       $project: {
         statusCounts: 1,
       },
     },
-  ]);
+  ];
+
+  if (sortStats !== "all") {
+    status_pipeline.push({ $limit: parseInt(sortStats) });
+  }
+
+  const status = await jobModel.aggregate(status_pipeline);
 
   //reduce status array to object with job status counts given $limit
   const totalCounts = status.reduce((acc, item) => {
@@ -183,18 +185,24 @@ export const showStats = async (req, res) => {
 
   console.log(totalCounts);
 
-  //reduce stats array to object
-  jobStatusStats = jobStatusStats.reduce((acc, curr) => {
-    const { _id: title, count } = curr;
-    acc[title] = count;
-    return acc;
-  }, {});
+  // //reduce stats array to object
+  // jobStatusStats = jobStatusStats.reduce((acc, curr) => {
+  //   const { _id: title, count } = curr;
+  //   acc[title] = count;
+  //   return acc;
+  // }, {});
+
+  // let sorted_jobStats = jobStatusStats;
+
+  // if (sortStats !== "all") {
+  //   sorted_jobStats = totalCounts;
+  // }
 
   const defaultStats = {
-    pending: jobStatusStats.pending || 0,
-    interview: jobStatusStats.interview || 0,
-    declined: jobStatusStats.declined || 0,
-    offer: jobStatusStats.offer || 0,
+    pending: totalCounts.pending || 0,
+    interview: totalCounts.interview || 0,
+    declined: totalCounts.declined || 0,
+    offer: totalCounts.offer || 0,
   };
 
   //put monthly stats pipeline in array so we can conditionally push $limit stage
@@ -213,7 +221,7 @@ export const showStats = async (req, res) => {
   ];
 
   // Add $limit stage conditionally
-  if (sortStats && sortStats !== "all") {
+  if (sortStats !== "all") {
     monthlyStats_pipeline.push({ $limit: parseInt(sortStats) });
   }
 
