@@ -101,14 +101,6 @@ export const showStats = async (req, res) => {
     sortStats,
   };
 
-  // //default pipeline - stats defaults to "all"
-  // let jobStatusStats = await jobModel.aggregate([
-  //   { $match: { createdBy: new mongoose.Types.ObjectId(req.user.userId) } }, //matching stage - get jobs assoc with user
-  //   {
-  //     $group: { _id: "$jobStatus", count: { $sum: 1 } },
-  //   },
-  // ]);
-
   const status_pipeline = [
     { $match: { createdBy: new mongoose.Types.ObjectId(req.user.userId) } },
     {
@@ -169,7 +161,7 @@ export const showStats = async (req, res) => {
     },
   ];
 
-  if (sortStats !== "all") {
+  if (sortStats && sortStats !== "all") {
     status_pipeline.push({ $limit: parseInt(sortStats) });
   }
 
@@ -182,21 +174,6 @@ export const showStats = async (req, res) => {
     });
     return acc;
   }, {});
-
-  console.log(totalCounts);
-
-  // //reduce stats array to object
-  // jobStatusStats = jobStatusStats.reduce((acc, curr) => {
-  //   const { _id: title, count } = curr;
-  //   acc[title] = count;
-  //   return acc;
-  // }, {});
-
-  // let sorted_jobStats = jobStatusStats;
-
-  // if (sortStats !== "all") {
-  //   sorted_jobStats = totalCounts;
-  // }
 
   const defaultStats = {
     pending: totalCounts.pending || 0,
@@ -221,7 +198,7 @@ export const showStats = async (req, res) => {
   ];
 
   // Add $limit stage conditionally
-  if (sortStats !== "all") {
+  if (sortStats && sortStats !== "all") {
     monthlyStats_pipeline.push({ $limit: parseInt(sortStats) });
   }
 
