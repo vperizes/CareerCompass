@@ -20,11 +20,9 @@ const statsQuery = (params) => {
 export const statsLoader =
   (queryClient) =>
   async ({ request }) => {
-    console.log(request.url);
     const params = Object.fromEntries([
       ...new URL(request.url).searchParams.entries(),
     ]);
-    console.log(params);
     await queryClient.ensureQueryData(statsQuery(params)); //ensureQueryData -> async function that gets an existing query's cached data.
     return { sortStatsValue: { ...params } };
   };
