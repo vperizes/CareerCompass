@@ -47,32 +47,37 @@ const StatsContainer = ({ defaultStats }) => {
   return (
     <Wrapper>
       <Form>
-        <input
-          className="btn"
-          type="button"
-          value="all"
-          name="sortStats"
-          onClick={(event) => {
-            submit(event.currentTarget.form);
-          }}
-        />
-        {increment.map((item) => {
-          return (
-            <button
-              key={item}
-              name="sortStats"
-              className="btn"
-              type="submit"
-              value={item}
-            >
-              {item == "1" ? "last month" : item + " months"}
-            </button>
-          );
-        })}
+        <div className="stats-buttons">
+          <input
+            className="btn"
+            type="button"
+            value="all"
+            name="sortStats"
+            onClick={(event) => {
+              submit(event.currentTarget.form);
+            }}
+          />
+          {increment.map((item) => {
+            return (
+              <button
+                key={item}
+                name="sortStats"
+                className="btn"
+                type="submit"
+                value={item}
+              >
+                {item == "1" ? "last month" : item + " months"}
+              </button>
+            );
+          })}
+        </div>
       </Form>
-      {stats.map((item) => {
-        return <StatItem key={item.title} {...item} />;
-      })}
+
+      <div className="stat-card">
+        {stats.map((item) => {
+          return <StatItem key={item.title} {...item} />;
+        })}
+      </div>
     </Wrapper>
   );
 };
