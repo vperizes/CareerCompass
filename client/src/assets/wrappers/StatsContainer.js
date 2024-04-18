@@ -13,7 +13,7 @@ const Wrapper = styled.section`
     row-gap: 2rem;
     grid-template-columns: 1fr;
   }
-  @media (min-width: 768px) {
+  @media (min-width: 990px) {
     .stat-card {
       grid-template-columns: 1fr 1fr;
       column-gap: 1rem;
