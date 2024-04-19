@@ -47,9 +47,9 @@ const StatsContainer = ({ defaultStats }) => {
   return (
     <Wrapper>
       <Form>
-        <div className="stats-buttons">
+        <div className="stats-links">
           <input
-            className="btn"
+            className="stat-link"
             type="button"
             value="all"
             name="sortStats"
@@ -62,7 +62,7 @@ const StatsContainer = ({ defaultStats }) => {
               <button
                 key={item}
                 name="sortStats"
-                className="btn"
+                className="stat-link"
                 type="submit"
                 value={item}
               >
