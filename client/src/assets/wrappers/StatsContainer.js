@@ -33,6 +33,10 @@ const Wrapper = styled.section`
     letter-spacing: 5px;
   }
 
+  .active {
+    color: var(--primary-700);
+  }
+
   .stat-card {
     margin-top: 2rem;
     display: grid;

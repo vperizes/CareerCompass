@@ -7,7 +7,7 @@ import {
 import Wrapper from "../assets/wrappers/StatsContainer";
 import StatItem from "./StatItem";
 import { STATS_SORT_BY } from "../../../utils/constants";
-import { Form, useSubmit } from "react-router-dom";
+import { Form, Link, useSubmit } from "react-router-dom";
 
 const StatsContainer = ({ defaultStats }) => {
   const stats = [
@@ -42,32 +42,19 @@ const StatsContainer = ({ defaultStats }) => {
   ];
 
   const increment = [...Object.values(STATS_SORT_BY)];
-  const submit = useSubmit();
 
   return (
     <Wrapper>
       <Form>
         <div className="stats-links">
-          <input
-            className="stat-link"
-            type="button"
-            value="all"
-            name="sortStats"
-            onClick={(event) => {
-              submit(event.currentTarget.form);
-            }}
-          />
+          <Link className="stat-link" to={{ search: "?sortStats=all" }}>
+            all
+          </Link>
           {increment.map((item) => {
             return (
-              <button
-                key={item}
-                name="sortStats"
-                className="stat-link"
-                type="submit"
-                value={item}
-              >
+              <Link className="stat-link" to={{ search: `?sortStats=${item}` }}>
                 {item == "1" ? "last month" : item + " months"}
-              </button>
+              </Link>
             );
           })}
         </div>
