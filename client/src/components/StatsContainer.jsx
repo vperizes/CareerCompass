@@ -7,7 +7,7 @@ import {
 import Wrapper from "../assets/wrappers/StatsContainer";
 import StatItem from "./StatItem";
 import { STATS_SORT_BY } from "../../../utils/constants";
-import { Form, Link, useSubmit } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const StatsContainer = ({ defaultStats }) => {
   const stats = [
@@ -45,20 +45,18 @@ const StatsContainer = ({ defaultStats }) => {
 
   return (
     <Wrapper>
-      <Form>
-        <div className="stats-links">
-          <Link className="stat-link" to={{ search: "?sortStats=all" }}>
-            all
-          </Link>
-          {increment.map((item) => {
-            return (
-              <Link className="stat-link" to={{ search: `?sortStats=${item}` }}>
-                {item == "1" ? "last month" : item + " months"}
-              </Link>
-            );
-          })}
-        </div>
-      </Form>
+      <div className="stats-links">
+        <Link className="stat-link" to={{ search: "?sortStats=all" }}>
+          all
+        </Link>
+        {increment.map((item) => {
+          return (
+            <Link className="stat-link" to={{ search: `?sortStats=${item}` }}>
+              {item == "1" ? "last month" : item + " months"}
+            </Link>
+          );
+        })}
+      </div>
 
       <div className="stat-card">
         {stats.map((item) => {
