@@ -40,12 +40,18 @@ const Stats = () => {
   const { defaultStats, monthlyApplications } = data;
 
   const submit = useSubmit();
-  let increments = [...Object.values(STATS_SORT_BY)];
-  let items = [];
-  increments.map((item) => {
-    item = item + " months";
-    items.push(item);
+  const increments = Object.values(STATS_SORT_BY).map((item) => {
+    if (item === "1") {
+      return `${item} month`;
+    } else {
+      return `${item} months`;
+    }
   });
+  // let items = [];
+  // increments.map((item) => {
+  //   item = item + " months";
+  //   items.push(item);
+  // });
 
   return (
     <Wrapper>
@@ -54,7 +60,7 @@ const Stats = () => {
           <FormInputSelect
             name="sortStats"
             labelText="Stats duration"
-            list={["all", ...items]}
+            list={["all", ...increments]}
             defaultValue={sortStats}
             onChange={(event) => {
               submit(event.currentTarget.form);
