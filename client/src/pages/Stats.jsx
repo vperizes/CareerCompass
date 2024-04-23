@@ -47,11 +47,6 @@ const Stats = () => {
       return `${item} months`;
     }
   });
-  // let items = [];
-  // increments.map((item) => {
-  //   item = item + " months";
-  //   items.push(item);
-  // });
 
   return (
     <Wrapper>
