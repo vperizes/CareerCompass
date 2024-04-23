@@ -6,8 +6,6 @@ import {
 } from "react-icons/fa";
 import Wrapper from "../assets/wrappers/StatsContainer";
 import StatItem from "./StatItem";
-import { STATS_SORT_BY } from "../../../utils/constants";
-import { Link } from "react-router-dom";
 
 const StatsContainer = ({ defaultStats }) => {
   const stats = [
@@ -41,23 +39,8 @@ const StatsContainer = ({ defaultStats }) => {
     },
   ];
 
-  const increment = [...Object.values(STATS_SORT_BY)];
-
   return (
     <Wrapper>
-      <div className="stats-links">
-        <Link className="stat-link" to={{ search: "?sortStats=all" }}>
-          all
-        </Link>
-        {increment.map((item) => {
-          return (
-            <Link className="stat-link" to={{ search: `?sortStats=${item}` }}>
-              {item == "1" ? "last month" : item + " months"}
-            </Link>
-          );
-        })}
-      </div>
-
       <div className="stat-card">
         {stats.map((item) => {
           return <StatItem key={item.title} {...item} />;
