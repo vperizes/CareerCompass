@@ -36,11 +36,16 @@ export const statsLoader =
 const Stats = () => {
   const { sortStatsValue } = useLoaderData();
   const { sortStats } = sortStatsValue;
-  console.log(sortStats);
   const { data } = useQuery(statsQuery(sortStatsValue)); //if cached data existed, useQuery will get it. if not, then ensureQueryData will refetch on autofocus.
   const { defaultStats, monthlyApplications } = data;
 
   const submit = useSubmit();
+  let increments = [...Object.values(STATS_SORT_BY)];
+  let items = [];
+  increments.map((item) => {
+    item = item + " months";
+    items.push(item);
+  });
 
   return (
     <Wrapper>
@@ -49,7 +54,7 @@ const Stats = () => {
           <FormInputSelect
             name="sortStats"
             labelText="Stats duration"
-            list={["all", ...Object.values(STATS_SORT_BY)]}
+            list={["all", ...items]}
             defaultValue={sortStats}
             onChange={(event) => {
               submit(event.currentTarget.form);
