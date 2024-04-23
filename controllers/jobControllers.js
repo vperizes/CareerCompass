@@ -95,11 +95,7 @@ export const deleteJob = async (req, res) => {
 //stats
 // need to set up month increments as query params to display
 export const showStats = async (req, res) => {
-  const { sortStats } = req.query;
-  const queryObj = {
-    createdBy: req.user.userId,
-    sortStats,
-  };
+  let { sortStats } = req.query;
 
   const status_pipeline = [
     { $match: { createdBy: new mongoose.Types.ObjectId(req.user.userId) } },
@@ -154,15 +150,17 @@ export const showStats = async (req, res) => {
         month: -1,
       },
     },
-    {
-      $project: {
-        statusCounts: 1,
-      },
-    },
   ];
 
   if (sortStats && sortStats !== "all") {
-    status_pipeline.push({ $limit: parseInt(sortStats) });
+    sortStats = parseInt(sortStats);
+    status_pipeline.push({ $limit: sortStats });
+    if (isNaN(sortStats) || sortStats <= 0) {
+      // Check if it's not a valid integer or negative
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ error: "Invalid sortStats parameter" });
+    }
   }
 
   const status = await jobModel.aggregate(status_pipeline);
@@ -199,7 +197,7 @@ export const showStats = async (req, res) => {
 
   // Add $limit stage conditionally
   if (sortStats && sortStats !== "all") {
-    monthlyStats_pipeline.push({ $limit: parseInt(sortStats) });
+    monthlyStats_pipeline.push({ $limit: sortStats });
   }
 
   let monthlyApplications = await jobModel.aggregate(monthlyStats_pipeline);
