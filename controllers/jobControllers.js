@@ -206,6 +206,7 @@ export const showStats = async (req, res) => {
 
   monthlyApplications = await jobModel.aggregate(monthlyStats_pipeline);
 
+  //getting latest month and year to use in match stage when sort stats = 1 month
   const latest_year = monthlyApplications[0]._id.year;
   const latest_month = monthlyApplications[0]._id.month;
 
@@ -225,6 +226,7 @@ export const showStats = async (req, res) => {
     })
     .reverse(); //reversing so we show months in chronologicl order
 
+  //this pipeline get us application count per day for the last  month of data entries
   if (sortStats === 1) {
     latestMonth_pipeline = [
       { $match: { createdBy: new mongoose.Types.ObjectId(req.user.userId) } },
@@ -268,7 +270,6 @@ export const showStats = async (req, res) => {
       },
     ];
     monthlyApplications = await jobModel.aggregate(latestMonth_pipeline);
-    console.log(monthlyApplications);
 
     monthlyApplications = monthlyApplications
       .map((item) => {
@@ -287,7 +288,6 @@ export const showStats = async (req, res) => {
       })
       .reverse();
   }
-  monthlyApplications;
 
   res.status(StatusCodes.OK).json({ defaultStats, monthlyApplications });
 };
