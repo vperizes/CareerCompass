@@ -2,7 +2,7 @@
 import jobModel from "../models/jobModel.js";
 import { StatusCodes } from "http-status-codes";
 import mongoose from "mongoose";
-import day from "dayjs";
+import dayjs from "dayjs";
 
 ////CONTROLLERS
 //Get all jobs
@@ -181,7 +181,11 @@ export const showStats = async (req, res) => {
   };
 
   //put monthly stats pipeline in array so we can conditionally push $limit stage
-  let monthlyStats_pipeline = [
+  let monthlyStats_pipeline;
+  let latestMonth_pipeline;
+  let monthlyApplications;
+
+  monthlyStats_pipeline = [
     { $match: { createdBy: new mongoose.Types.ObjectId(req.user.userId) } },
     {
       $group: {
@@ -200,7 +204,10 @@ export const showStats = async (req, res) => {
     monthlyStats_pipeline.push({ $limit: sortStats });
   }
 
-  let monthlyApplications = await jobModel.aggregate(monthlyStats_pipeline);
+  monthlyApplications = await jobModel.aggregate(monthlyStats_pipeline);
+
+  const latest_year = monthlyApplications[0]._id.year;
+  const latest_month = monthlyApplications[0]._id.month;
 
   monthlyApplications = monthlyApplications
     .map((item) => {
@@ -210,13 +217,77 @@ export const showStats = async (req, res) => {
       } = item;
 
       // using dayjs to format year and month for each item
-      const date = day()
+      const date = dayjs()
         .month(month - 1) //dayjs counts months starting at zero so need to -1
         .year(year)
         .format("MMM YY");
       return { date, count };
     })
     .reverse(); //reversing so we show months in chronologicl order
+
+  if (sortStats === 1) {
+    latestMonth_pipeline = [
+      { $match: { createdBy: new mongoose.Types.ObjectId(req.user.userId) } },
+      {
+        $project: {
+          year: {
+            $year: "$applicationDate",
+          },
+          month: {
+            $month: "$applicationDate",
+          },
+          day: {
+            $dayOfMonth: "$applicationDate",
+          },
+        },
+      },
+      {
+        $group: {
+          _id: {
+            year: "$year",
+            month: "$month",
+            day: "$day",
+          },
+          count: {
+            $sum: 1,
+          },
+        },
+      },
+      {
+        $sort: {
+          "_id.year": -1,
+          "_id.month": -1,
+          "_id.day": -1,
+        },
+      },
+      {
+        $match: {
+          "_id.month": latest_month,
+          "_id.year": latest_year,
+        },
+      },
+    ];
+    monthlyApplications = await jobModel.aggregate(latestMonth_pipeline);
+    console.log(monthlyApplications);
+
+    monthlyApplications = monthlyApplications
+      .map((item) => {
+        const {
+          _id: { year, month, day },
+          count,
+        } = item;
+
+        // using dayjs to format year and month for each item
+        const date = dayjs()
+          .date(day)
+          .month(month - 1) //dayjs counts months starting at zero so need to -1
+          .year(year)
+          .format("MMM D, YY");
+        return { date, count };
+      })
+      .reverse();
+  }
+  monthlyApplications;
 
   res.status(StatusCodes.OK).json({ defaultStats, monthlyApplications });
 };
