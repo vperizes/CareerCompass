@@ -1,6 +1,6 @@
 import { Form, Link, useSubmit } from "react-router-dom";
 import Wrapper from "../assets/wrappers/DashboardFormPage";
-import { FormInput, FormInputSelect, SubmitBtn } from ".";
+import { FormInput, FormInputSelect } from ".";
 import { JOB_SORT_BY, JOB_STATUS, JOB_TYPE } from "../../../utils/constants";
 import { useAllJobsContext } from "../pages/AllJobs";
 
@@ -17,7 +17,7 @@ const SearchContainer = () => {
       clearTimeout(timeout);
       timeout = setTimeout(() => {
         onChange(form);
-      }, 2000);
+      }, 1500);
     };
   };
   return (
