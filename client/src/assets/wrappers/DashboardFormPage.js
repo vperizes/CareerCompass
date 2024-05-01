@@ -43,9 +43,9 @@ const Wrapper = styled.section`
   }
 
   .avatar-img {
-    position: relative;
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
     border-radius: 50%;
     border: solid 2px var(--primary-400);
   }
