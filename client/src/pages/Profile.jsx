@@ -5,6 +5,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { GiPlagueDoctorProfile } from "react-icons/gi";
 import { TbCameraPlus } from "react-icons/tb";
+import { useState } from "react";
 
 export const updateUserAction =
   (queryClient) =>
@@ -32,14 +33,27 @@ const Profile = () => {
   const { user } = useOutletContext();
   const { name, lastName, email, location, avatar } = user;
 
+  const [previewAvatar, setPreviewAvatar] = useState(avatar);
+
+  const handleChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setPreviewAvatar(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   return (
     <Wrapper>
       <Form method="post" className="form" encType="multipart/form-data">
         <h4 className="form-title">profile</h4>
         <div className="imgupdate-center">
           <div>
-            {user.avatar ? (
-              <img src={user.avatar} alt="avatar" className="avatar-img" />
+            {avatar ? (
+              <img src={previewAvatar} alt="avatar" className="avatar-img" />
             ) : (
               <GiPlagueDoctorProfile className="avatar-img" />
             )}
@@ -48,6 +62,7 @@ const Profile = () => {
               id="avatar"
               name="avatar"
               accept="image/*"
+              onChange={handleChange}
               hidden
             />
             <label htmlFor="avatar">
