@@ -7,7 +7,7 @@ import * as dotenv from "dotenv";
 import cloudinary from "cloudinary";
 import helmet from "helmet";
 import mongoSanitize from "express-mongo-sanitize";
-import { makeRequest } from "./utils/avoidSpinDown.js";
+// import { makeRequest } from "./utils/avoidSpinDown.js";
 
 dotenv.config();
 const app = express();
@@ -82,6 +82,6 @@ app.use("*", (req, res) => {
 app.use(errorHandlerMiddleware);
 
 // Call request function every 14.5 minutes to avid server spin down
-if (process.env.NODE_ENV !== "development") {
-  setInterval(makeRequest, 1000 * 62 * 14);
-}
+// if (process.env.NODE_ENV !== "development") {
+//   setInterval(makeRequest, 1000 * 62 * 14);
+// }
