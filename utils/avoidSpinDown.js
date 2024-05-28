@@ -2,7 +2,7 @@ import https from "https";
 
 //code to make request to render.com (keep server from spinning down)
 export const makeRequest = () => {
-  // Replace 'example.com' with the actual domain of the website you want to ping
+  // ping home page
   const url = "https://careercompass-0z1a.onrender.com/";
 
   try {
@@ -17,7 +17,7 @@ export const makeRequest = () => {
 
         //Event listener for 'end' event, indicates entire response has been received.
         response.on("end", () => {
-          console.log("Request successful:", data);
+          console.log("Request successful!");
         });
       })
       //error event listener. msg logged if error occurs during request
