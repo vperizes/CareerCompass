@@ -7,7 +7,8 @@ import * as dotenv from "dotenv";
 import cloudinary from "cloudinary";
 import helmet from "helmet";
 import mongoSanitize from "express-mongo-sanitize";
-// import { makeRequest } from "./utils/avoidSpinDown.js";
+import { makeRequest } from "./utils/avoidSpinDown.js";
+import dayjs from "dayjs";
 
 dotenv.config();
 const app = express();
@@ -81,7 +82,15 @@ app.use("*", (req, res) => {
 //express-async package handles async errors and passes them to this middleware without needing try-catch block
 app.use(errorHandlerMiddleware);
 
-// Call request function every 14.5 minutes to avid server spin down
-// if (process.env.NODE_ENV !== "development") {
-//   setInterval(makeRequest, 1000 * 62 * 14);
-// }
+// Call request function every 14.5 minutes if local time is b/w 8am and 8pm on a weekday to avoid server spin down
+const morning = 8;
+const evening = 23;
+const current_hour = dayjs().hour();
+const current_day = dayjs().day();
+const isWeekday = current_day >= 1 && current_day <= 5;
+
+const upTime = current_hour > morning && current_hour < evening;
+
+if (process.env.NODE_ENV !== "development" && upTime && isWeekday) {
+  setInterval(makeRequest, 1000 * 62 * 14);
+}
