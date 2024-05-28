@@ -84,7 +84,7 @@ app.use(errorHandlerMiddleware);
 
 // Call request function every 14.5 minutes if local time is b/w 8am and 8pm on a weekday to avoid server spin down
 const morning = 8;
-const evening = 23;
+const evening = 20;
 const current_hour = dayjs().hour();
 const current_day = dayjs().day();
 const isWeekday = current_day >= 1 && current_day <= 5;
