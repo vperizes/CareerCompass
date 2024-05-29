@@ -29,6 +29,7 @@ import userRouter from "./routes/userRouter.js";
 //middleware imports
 import errorHandlerMiddleware from "./middleware/errorHandlerMiddleware.js";
 import { authenticateUser } from "./middleware/authMiddleware.js";
+import { log } from "console";
 
 //cloudinary API
 cloudinary.config({
@@ -91,6 +92,6 @@ const isWeekday = current_day >= 1 && current_day <= 5;
 
 const upTime = current_hour > morning && current_hour < evening;
 
-if (process.env.NODE_ENV !== "development" && upTime && isWeekday) {
-  setInterval(makeRequest, 1000 * 62 * 14);
+if (upTime && isWeekday) {
+  setInterval(makeRequest, 1000);
 }
