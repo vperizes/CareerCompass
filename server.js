@@ -93,5 +93,5 @@ const isWeekday = current_day >= 1 && current_day <= 5;
 const upTime = current_hour > morning && current_hour < evening;
 
 if (upTime && isWeekday) {
-  setInterval(makeRequest, 1000);
+  setInterval(makeRequest, 1000 * 62 * 14);
 }
